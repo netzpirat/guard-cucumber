@@ -7,23 +7,31 @@ module Guard
         include Open3
 
         def run(paths, options = {})
-          message = options[:message] || (paths == ['features'] ? 'Run all Cucumber features' : "Run Cucumber features #{ paths.join(' ') }")
+          message = options[:message] || run_message(paths)
           UI.info message, :reset => true
 
-          growl = ''
-          popen2e(cucumber_command(paths)) do |input, output|
-            input.close
-            while !output.eof?
-              line = output.readline
-              growl << line if line =~ /^\d+ (steps|scenarios)/
-              puts line
-            end
-          end
-
-          ::Guard::Notifier.notify(growl.gsub(/\[\d+m\d*?/, ''), :title => 'Cucumber results', :image => ($? == 0 ? :success : :failed))
+          status, message = execute_cucumber(paths)
+          ::Guard::Notifier.notify(message, :title => 'Cucumber results', :image => (status == 0 ? :success : :failed))
         end
 
       private
+
+        def execute_cucumber(paths)
+          message = ''
+          status = 0
+
+          popen2e(cucumber_command(paths)) do |input, output, wait_thread|
+            input.close
+            while !output.eof?
+              line = output.readline
+              message << line if line =~ /^\d+ (steps|scenarios)/
+              puts line
+            end
+            status = wait_thread.value
+          end
+
+          [status, message.gsub(/\[\d+m\d*?/, '')]
+        end
 
         def cucumber_command(paths)
           cmd = []
@@ -36,6 +44,10 @@ module Guard
 
         def bundler?
           @bundler ||= File.exist?("#{Dir.pwd}/Gemfile")
+        end
+
+        def run_message(paths)
+          paths == ['features'] ? 'Run all Cucumber features' : "Run Cucumber feature#{ paths.size == 1 ? '' : 's' } #{ paths.join(' ') }"
         end
 
       end
