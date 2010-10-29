@@ -3,35 +3,42 @@ require 'spec_helper'
 describe Guard::Cucumber::Runner do
   let(:runner) { Guard::Cucumber::Runner }
 
+  before do
+    @configuration = ::Cucumber::Cli::Configuration.new
+    @runtime = ::Cucumber::Runtime.new
+    runner.stub(:run_cucumber)
+  end
+
   describe '.run' do
-    context 'when no message option is passed' do
+    context 'when no message option is passed for one feature' do
+      before do
+        @configuration.parse!(['features/a.feature'])
+      end
       it 'shows a default message' do
-        runner.stub(:popen2e).and_return ['', 0]
-        Guard::UI.should_receive(:info).with('Run Cucumber features features/a.feature', { :reset => true })
-        runner.run(['features/a.feature'])
+        Guard::UI.should_receive(:info).with('Run Cucumber feature features/a.feature', { :reset => true })
+        runner.run(@runtime, @configuration)
+      end
+    end
+
+    context 'when no message option is passed for one feature' do
+      before do
+        @configuration.parse!(['features/a.feature', 'features/b.feature'])
+      end
+      it 'shows a default message' do
+        Guard::UI.should_receive(:info).with('Run Cucumber features features/a.feature features/b.feature', { :reset => true })
+        runner.run(@runtime, @configuration)
       end
     end
 
     context 'when a custom message option is passed' do
-      it 'shows the custom message' do
-        runner.stub(:popen2e).and_return ['', 0]
+       before do
+        @configuration.parse!(['features'])
+       end
+       it 'shows the custom message' do
         Guard::UI.should_receive(:info).with('Custom Message', { :reset => true })
-        runner.run(['features/a.feature'], { :message => 'Custom Message' })
+        runner.run(@runtime, @configuration, { :message => 'Custom Message' })
       end
     end
   end
 
-  describe '.cucumber_command' do
-    it 'passes the paths to the cucumber command' do
-      runner.stub(:bundler?).and_return false
-      runner.should_receive(:popen2e).with('cucumber --color features/a.feature').and_return true
-      runner.run(['features/a.feature'])
-    end
-
-    it 'uses the gem bundler when a gemfile exists' do
-      runner.stub(:bundler?).and_return true
-      runner.should_receive(:popen2e).with('bundle exec cucumber --color features/a.feature').and_return true
-      runner.run(['features/a.feature'])
-    end
-  end
 end
