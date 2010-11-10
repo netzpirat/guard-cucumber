@@ -31,19 +31,19 @@ Please read {guard doc}[http://github.com/guard/guard#readme] for more info abou
 
     guard 'cucumber' do
       watch('^features/(.*).feature')
-      watch('^features/support')                       { 'features' }
-      watch('^features/step_definitions')              { 'features' }
+      watch('^features/support')           { 'features' }
+      watch('^features/step_definitions')  { 'features' }
     end
 
 == Options
 
 There are several options you can pass to the Cucumber Guard to customize the arguments when calling Cucumber:
 
-    :color => false            # Disable colored output
-    :drb => true               # Enable Spork DRb server
-    :port => 1234              # Set custom Spork port
-    :bundler => false          # Don't use "bundle exec"
-    :rvm => ['1.8.7', '1.9.2'] # Directly run your specs on multiple ruby
+    :color => false                        # Disable colored output
+    :drb => true                           # Enable Spork DRb server
+    :port => 1234                          # Set custom Spork port
+    :bundler => false                      # Don't use "bundle exec"
+    :rvm => ['1.8.7', '1.9.2']             # Directly run your specs on multiple ruby
     
 OR you can enable the EXPERIMENTAL Cucumber environment preloader with:
 
