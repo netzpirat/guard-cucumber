@@ -1,3 +1,4 @@
+require 'guard'
 require 'cucumber/formatter/progress'
 
 class CucumberFormatter < Cucumber::Formatter::Progress

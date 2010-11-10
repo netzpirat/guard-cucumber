@@ -1,36 +1,75 @@
 require 'spec_helper'
 
 describe Guard::Cucumber do
-  subject { Guard::Cucumber.new }
 
   before do
-    subject.instance_variable_set(:@configuration, ::Cucumber::Cli::Configuration.new)
-    subject.instance_variable_set(:@runtime, ::Cucumber::Runtime.new)
     Dir.stub(:glob).and_return ['features/a.feature', 'features/subfolder/b.feature']
   end
 
-  describe '#run_all' do
-    it 'runs all features' do
-      Guard::Cucumber::Runner.should_receive(:run).with(subject.runtime, subject.configuration, :message => 'Run all Cucumber features')
-      subject.run_all
+  context 'without preloading' do
+    let(:cucumber) { Guard::Cucumber.new }
+    let(:runner)   { Guard::Cucumber::Runner }
+
+    describe '.run_all' do
+      it 'uses the normal runner' do
+        runner.should_receive(:run).with(['features'], :message => 'Run all Cucumber features')
+        cucumber.run_all
+      end
+    end
+
+    describe '.run_on_change' do
+      it 'runs cucumber with all features' do
+        runner.should_receive(:run).with(['features'], :message => 'Run all Cucumber features')
+        cucumber.run_on_change(['features'])
+      end
+
+      it 'runs cucumber with single feature' do
+        runner.should_receive(:run).with(['features/a.feature'], {})
+        cucumber.run_on_change(['features/a.feature'])
+      end
+
+      it 'should pass the matched paths to the inspector for cleanup' do
+        runner.stub(:run)
+        Guard::Cucumber::Inspector.should_receive(:clean).with(['features']).and_return ['features']
+        cucumber.run_on_change(['features'])
+      end
     end
   end
 
-  describe '#run_on_change' do
-    it 'runs cucumber with all features' do
-      Guard::Cucumber::Runner.should_receive(:run).with(subject.runtime, subject.configuration, :message => 'Run all Cucumber features')
-      subject.run_on_change(['features'])
+  context 'with preloading' do
+    let(:cucumber) { Guard::Cucumber.new(nil, { :preload => true }) }
+    let(:runner)   { Guard::Cucumber::PreloadRunner }
+
+    describe '.start' do
+      it 'initializes the preload runner' do
+        runner.should_receive(:start)
+        cucumber.start
+      end
     end
 
-    it 'runs cucumber with single feature' do
-      Guard::Cucumber::Runner.should_receive(:run).with(subject.runtime, subject.configuration, {})
-      subject.run_on_change(['features/a.feature'])
+    describe '.run_all' do
+      it 'uses the preload runner' do
+        runner.should_receive(:run).with(['features'], :preload => true, :message => 'Run all Cucumber features')
+        cucumber.run_all
+      end
     end
 
-    it 'should pass the matched paths to the inspector for cleanup' do
-      Guard::Cucumber::Runner.stub(:run)
-      Guard::Cucumber::Inspector.should_receive(:clean).with(['features']).and_return ['features']
-      subject.run_on_change(['features'])
+    describe '.run_on_change' do
+      it 'runs cucumber with all features' do
+        runner.should_receive(:run).with(['features'], :preload => true, :message => 'Run all Cucumber features')
+        cucumber.run_on_change(['features'])
+      end
+
+      it 'runs cucumber with single feature' do
+        runner.should_receive(:run).with(['features/a.feature'], { :preload => true })
+        cucumber.run_on_change(['features/a.feature'])
+      end
+
+      it 'should pass the matched paths to the inspector for cleanup' do
+        runner.stub(:run)
+        Guard::Cucumber::Inspector.should_receive(:clean).with(['features']).and_return ['features']
+        cucumber.run_on_change(['features'])
+      end
     end
   end
 end
