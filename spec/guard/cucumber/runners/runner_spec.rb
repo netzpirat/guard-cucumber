@@ -38,17 +38,26 @@ describe Guard::Cucumber::Runner do
       )
       runner.run(['features'], { :drb => true, :port => 1234 })
     end
+
     it 'runs with a profile argument' do
       runner.should_receive(:system).with(
         "bundle exec cucumber --profile profile --require #{@lib_path.join('guard/cucumber/cucumber_formatter.rb')} --format CucumberFormatter --color --require features features"
       )
       runner.run(['features'], { :profile => 'profile'})
     end
+
     it 'runs without a profile argument' do
       runner.should_receive(:system).with(
         "bundle exec cucumber --require #{@lib_path.join('guard/cucumber/cucumber_formatter.rb')} --format CucumberFormatter --color --require features features"
       )
       runner.run(['features'], {})
+    end
+
+    it 'runs with command argument' do
+      runner.should_receive(:system).with(
+        "bundle exec cucumber --require #{@lib_path.join('guard/cucumber/cucumber_formatter.rb')} --format CucumberFormatter --color --require features --custom command features"
+      )
+      runner.run(['features'], { :command => "--custom command"})
     end
   end
 end

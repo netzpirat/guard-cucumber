@@ -23,6 +23,7 @@ module Guard
           cmd << "--drb" if options[:drb]
           cmd << "--port #{ options[:port] }" if options[:port] && options[:drb]
           cmd << "--require features"
+          cmd << options[:command] if options[:command]
           cmd = cmd + paths
           cmd.join(' ')
         end
