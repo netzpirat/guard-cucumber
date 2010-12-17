@@ -17,6 +17,7 @@ module Guard
           cmd << 'bundle exec' if bundler? && options[:bundler] != false
 
           cmd << 'cucumber'
+          cmd << "--profile #{options[:profile]}" if options[:profile]
           cmd << "--require #{ File.expand_path(File.join(File.dirname(__FILE__), '..', 'cucumber_formatter.rb')) } --format CucumberFormatter"
           cmd << '--color' if options[:color] != false
           cmd << "--drb" if options[:drb]
@@ -33,3 +34,4 @@ module Guard
     end
   end
 end
+
