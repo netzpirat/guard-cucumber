@@ -1,5 +1,5 @@
 guard 'cucumber' do
-  watch('^features/(.*).feature')
-  watch('^features/support')                       { 'features' }
-  watch('^features/step_definitions')              { 'features' }
+  watch(%r{features/.+\.feature})
+  watch(%r{features/support/.+})          { 'features' }
+  watch(%r{features/step_definitions/.+}) { 'features' }
 end
