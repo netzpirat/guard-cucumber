@@ -44,10 +44,7 @@ There are several options you can pass to the Cucumber Guard to customize the ar
     :port => 1234                          # Set custom Spork port
     :bundler => false                      # Don't use "bundle exec"
     :rvm => ['1.8.7', '1.9.2']             # Directly run your specs on multiple ruby
-    
-OR you can enable the EXPERIMENTAL Cucumber environment preloader with:
-
-    :preload => true
+    :profile => 'cucumber_profile'         # Let cucumber use another profile than the default one
 
 == Development
 
