@@ -22,7 +22,16 @@ module Guard
           cmd << '--color' if options[:color] != false
           cmd << "--drb" if options[:drb]
           cmd << "--port #{ options[:port] }" if options[:port] && options[:drb]
-          cmd << "--require features" if not require_command?(options)
+
+          if not require_command?(options)
+            if options[:drb]
+              cmd << "--require features/support"
+              cmd << "--require features/step_definitions"
+            else
+              cmd << "--require features"
+            end
+          end
+
           cmd << options[:command] if options[:command]
           cmd = cmd + paths
           cmd.join(' ')
@@ -40,4 +49,3 @@ module Guard
     end
   end
 end
-

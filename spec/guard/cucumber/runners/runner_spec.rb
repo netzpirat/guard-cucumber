@@ -27,14 +27,14 @@ describe Guard::Cucumber::Runner do
 
     it 'runs with drb argument' do
       runner.should_receive(:system).with(
-          "bundle exec cucumber --require #{@lib_path.join('guard/cucumber/cucumber_formatter.rb')} --format CucumberFormatter --color --drb --require features features"
+          "bundle exec cucumber --require #{@lib_path.join('guard/cucumber/cucumber_formatter.rb')} --format CucumberFormatter --color --drb --require features/support --require features/step_definitions features"
       )
       runner.run(['features'], { :drb => true })
     end
 
     it 'runs with port argument' do
       runner.should_receive(:system).with(
-          "bundle exec cucumber --require #{@lib_path.join('guard/cucumber/cucumber_formatter.rb')} --format CucumberFormatter --color --drb --port 1234 --require features features"
+          "bundle exec cucumber --require #{@lib_path.join('guard/cucumber/cucumber_formatter.rb')} --format CucumberFormatter --color --drb --port 1234 --require features/support --require features/step_definitions features"
       )
       runner.run(['features'], { :drb => true, :port => 1234 })
     end
@@ -70,4 +70,3 @@ describe Guard::Cucumber::Runner do
     end
   end
 end
-
