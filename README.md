@@ -60,7 +60,8 @@ Pull requests are very welcome! Make sure your patches are well tested.
 
 ## Contributors
 
-[Oriol Gual](https://github.com/oriolgual)
+* [Oriol Gual](https://github.com/oriolgual)
+* [Aleksei Gusev](https://github.com/hron)
 
 ## Acknowledgment
 
