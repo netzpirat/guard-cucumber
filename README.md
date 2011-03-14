@@ -1,32 +1,30 @@
 # Guard::Cucumber
 
-Guard::Cucumber allows to automatically run Cucumber features when files are modified.
-
-- Tested on Ruby 1.8.7 & 1.9.2.
+Guard::Cucumber allows you to automatically run Cucumber features when files are modified. It is tested on Ruby 1.8.7 & 1.9.2.
 
 ## Install
 
-Please be sure to have [guard](http://github.com/guard/guard) installed before continue.
+Please be sure to have [Guard](http://github.com/guard/guard) installed before continue.
 
 Install the gem:
 
     gem install guard-cucumber
 
-Add it to your Gemfile (inside test group):
+Add it to your `Gemfile`, preferably inside the test group:
 
     gem 'guard-cucumber'
 
-Add guard definition to your Guardfile by running this command:
+Add Guard definition to your `Guardfile` by running this command:
 
     guard init cucumber
 
 ## Usage
 
-Please read the [Guard usage documentation](http://github.com/guard/guard#readme)
+Please read the [Guard usage documentation](http://github.com/guard/guard#readme).
 
 ## Guardfile
 
-Cucumber guard can be adapted to all kind of projects. Please read the
+Guard::Cucumber can be adapted to all kind of projects. Please read the
 [Guard documentation](http://github.com/guard/guard#readme) for more information about the Guardfile DSL.
 
     guard 'cucumber' do
@@ -37,7 +35,7 @@ Cucumber guard can be adapted to all kind of projects. Please read the
 
 ## Options
 
-There are several options you can pass to the Cucumber Guard to customize the arguments when calling Cucumber:
+There are several options you can pass to Guard::Cucumber to customize the arguments when calling Cucumber:
 
     :color => false                        # Disable colored output
     :drb => true                           # Enable Spork DRb server
@@ -45,7 +43,7 @@ There are several options you can pass to the Cucumber Guard to customize the ar
     :bundler => false                      # Don't use "bundle exec"
     :rvm => ['1.8.7', '1.9.2']             # Directly run your specs on multiple ruby
     :profile => 'cucumber_profile'         # Let cucumber use another profile than the default one
-    :command => "whatever"                 # Pass any other command to cucumber
+    :command => 'whatever'                 # Pass any other command to cucumber
 
 ## Development
 
@@ -53,10 +51,6 @@ There are several options you can pass to the Cucumber Guard to customize the ar
 - Report issues/Questions/Feature requests on [GitHub Issues](http://github.com/netzpirat/guard-cucumber/issues)
 
 Pull requests are very welcome! Make sure your patches are well tested.
-
-## Author
-
-[Michael Kessler](http://github.com/netzpirat)
 
 ## Contributors
 
