@@ -22,7 +22,7 @@ Add guard definition to your Guardfile by running this command:
 
 ## Usage
 
-Please read [guard usage doc](http://github.com/guard/guard#readme)
+Please read the [Guard usage documentation](http://github.com/guard/guard#readme)
 
 ## Guardfile
 
