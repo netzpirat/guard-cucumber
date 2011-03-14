@@ -54,9 +54,13 @@ There are several options you can pass to the Cucumber Guard to customize the ar
 
 Pull requests are very welcome! Make sure your patches are well tested.
 
-== Authors
+== Author
 
 {Michael Kessler}[http://github.com/netzpirat]
+
+== Contributors
+
+{Oriol Gual}[https://github.com/oriolgual]
 
 == Acknowledgment
 
