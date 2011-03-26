@@ -18,7 +18,7 @@ module Guard
 
           cmd << 'cucumber'
           cmd << "--profile #{options[:profile]}" if options[:profile]
-          cmd << "--require #{ File.expand_path(File.join(File.dirname(__FILE__), '..', 'cucumber_formatter.rb')) } --format CucumberFormatter"
+          cmd << "--require #{ File.expand_path(File.join(File.dirname(__FILE__), '..', 'notification_formatter.rb')) } --format Guard::Cucumber::NotificationFormatter --out /dev/null"
           cmd << '--color' if options[:color] != false
           cmd << "--drb" if options[:drb]
           cmd << "--port #{ options[:port] }" if options[:port] && options[:drb]
