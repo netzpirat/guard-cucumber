@@ -33,12 +33,12 @@ Guard::Cucumber can be adapted to all kind of projects and comes with a default 
       watch(%r{features/step_definitions/(.+)_steps\.rb}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
     end
 
-Expressed in plain English, this configuration tells Guard::Cucumber
+Expressed in plain English, this configuration tells Guard::Cucumber:
 
 1. When a file within the features directory that ends in feature is modified, just run that single feature.
 2. When any file within features/support directory is modified, run all features.
-3. When a file within the features/step_definitions directory that ends in _steps.rb is modified,
-run the first feature that matches the name (_steps.rb replaced by .feature) and when no feature is found,
+3. When a file within the features/step_definitions directory that ends in \_steps.rb is modified,
+run the first feature that matches the name (\_steps.rb replaced by .feature) and when no feature is found,
 then run all features.
 
 Please read the [Guard documentation](http://github.com/guard/guard#readme) for more information about the Guardfile DSL.
@@ -47,18 +47,18 @@ Please read the [Guard documentation](http://github.com/guard/guard#readme) for 
 
 You can pass any of the standard Cucumber CLI options using the :cli option:
 
-  guard 'cucumber', :cli => '-c --drb --port 1234 --profile custom' do
-    ...
-  end
+    guard 'cucumber', :cli => '-c --drb --port 1234 --profile custom' do
+      ...
+    end
 
 Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and have no effect anymore.
 
 ### List of available options
 
-    :cli => '-c -p pretty'       # Pass arbitrary Cucumber CLI arguments, default: nil
-    :bundler => false            # Don't use "bundle exec" to run the Cucumber command, default: true
-    :rvm => ['1.8.7', '1.9.2']   # Directly run your features on multiple ruby versions, default: nil
-    :notification => false       # Don't display Growl (or Libnotify) notification, default: true
+    :cli => '-c -f pretty'            # Pass arbitrary Cucumber CLI arguments, default: nil
+    :bundler => false                 # Don't use "bundle exec" to run the Cucumber command, default: true
+    :rvm => ['1.8.7', '1.9.2']        # Directly run your features on multiple ruby versions, default: nil
+    :notification => false            # Don't display Growl (or Libnotify) notification, default: true
 
 ## Development
 
