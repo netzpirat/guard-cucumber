@@ -60,6 +60,15 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
     :rvm => ['1.8.7', '1.9.2']        # Directly run your features on multiple ruby versions, default: nil
     :notification => false            # Don't display Growl (or Libnotify) notification, default: true
 
+## Spork configuration
+
+To use Guard::Cucumber with [Spork](https://github.com/timcharper/spork) (preferabbly managed through
+[Guard::Spork](https://github.com/guard/guard-spork)), you'll want to use the following configuration:
+
+    guard 'cucumber', :cli => '--drb --require features/support --require features/step_definitions' do
+      ...
+    end
+
 ## Development
 
 - Source hosted at [GitHub](http://github.com/netzpirat/guard-cucumber)
