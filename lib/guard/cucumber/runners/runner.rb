@@ -18,7 +18,7 @@ module Guard
 
           cmd << 'cucumber'
           cmd << "--profile #{options[:profile]}" if options[:profile]
-          cmd << "--require #{ File.expand_path(File.join(File.dirname(__FILE__), '..', 'notification_formatter.rb')) } --format Guard::Cucumber::NotificationFormatter --out /dev/null"
+          cmd << "--require #{ File.expand_path(File.join(File.dirname(__FILE__), '..', 'notification_formatter.rb')) } --format Guard::Cucumber::NotificationFormatter --out #{ null_device }"
           cmd << '--color' if options[:color] != false
           cmd << "--drb" if options[:drb]
           cmd << "--port #{ options[:port] }" if options[:port] && options[:drb]
@@ -45,6 +45,10 @@ module Guard
           !options[:command].nil? && options[:command] =~ /^--require/
         end
 
+        def null_device
+          RUBY_PLATFORM.index('mswin') ? 'NUL' : '/dev/null'
+        end
+        
       end
     end
   end
