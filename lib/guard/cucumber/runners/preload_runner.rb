@@ -1,5 +1,6 @@
 require 'cucumber'
-require 'guard/cucumber/cucumber_formatter'
+require 'cucumber/formatter/progress'
+require 'guard/cucumber/notification_formatter'
 
 module Guard
   class Cucumber
@@ -28,8 +29,11 @@ module Guard
           message = options[:message] || run_message(features)
           UI.info message, :reset => true
 
-          formatter = CucumberFormatter.new(@runtime, $stdout, @configuration.instance_variable_get('@options'))
-          runner = ::Cucumber::Ast::TreeWalker.new(@runtime, [formatter], @configuration)
+          formatters = [
+            NotificationFormatter.new(@runtime, $stdout, @configuration.instance_variable_get('@options')),
+            ::Cucumber::Formatter::Progress.new(@runtime, $stdout, @configuration.instance_variable_get('@options'))
+          ]
+          runner = ::Cucumber::Ast::TreeWalker.new(@runtime, formatters, @configuration)
           @runtime.visitor = runner
           loader = ::Cucumber::Runtime::FeaturesLoader.new(features, @configuration.filters, @configuration.tag_expression)
           runner.visit_features(loader.features)
