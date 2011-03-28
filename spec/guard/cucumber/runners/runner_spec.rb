@@ -3,71 +3,43 @@ require 'spec_helper'
 describe Guard::Cucumber::Runner do
   let(:runner) { Guard::Cucumber::Runner }
   let(:null_device) { RUBY_PLATFORM.index('mswin') ? 'NUL' : '/dev/null' }
-  
+
   describe '#run' do
-    it 'runs with rvm exec' do
-      runner.should_receive(:system).with(
-          "rvm 1.8.7,1.9.2 exec bundle exec cucumber --require #{@lib_path.join('guard/cucumber/notification_formatter.rb')} --format Guard::Cucumber::NotificationFormatter --out #{null_device} --color --require features features"
-      )
-      runner.run(['features'], { :rvm => ['1.8.7', '1.9.2'] })
-    end
-
-    it 'runs without bundler' do
-      runner.should_receive(:system).with(
-          "cucumber --require #{@lib_path.join('guard/cucumber/notification_formatter.rb')} --format Guard::Cucumber::NotificationFormatter --out #{null_device} --color --require features features"
-      )
-      runner.run(['features'], { :bundler => false })
-    end
-
-    it 'runs without color argument' do
-      runner.should_receive(:system).with(
-          "bundle exec cucumber --require #{@lib_path.join('guard/cucumber/notification_formatter.rb')} --format Guard::Cucumber::NotificationFormatter --out #{null_device} --require features features"
-      )
-      runner.run(['features'], { :color => false })
-    end
-
-    it 'runs with drb argument' do
-      runner.should_receive(:system).with(
-          "bundle exec cucumber --require #{@lib_path.join('guard/cucumber/notification_formatter.rb')} --format Guard::Cucumber::NotificationFormatter --out #{null_device} --color --drb --require features/support --require features/step_definitions features"
-      )
-      runner.run(['features'], { :drb => true })
-    end
-
-    it 'runs with port argument' do
-      runner.should_receive(:system).with(
-          "bundle exec cucumber --require #{@lib_path.join('guard/cucumber/notification_formatter.rb')} --format Guard::Cucumber::NotificationFormatter --out #{null_device} --color --drb --port 1234 --require features/support --require features/step_definitions features"
-      )
-      runner.run(['features'], { :drb => true, :port => 1234 })
-    end
-
-    it 'runs with a profile argument' do
-      runner.should_receive(:system).with(
-          "bundle exec cucumber --profile profile --require #{@lib_path.join('guard/cucumber/notification_formatter.rb')} --format Guard::Cucumber::NotificationFormatter --out #{null_device} --color --require features features"
-      )
-      runner.run(['features'], { :profile => 'profile' })
-    end
-
-    it 'runs without a profile argument' do
-      runner.should_receive(:system).with(
-          "bundle exec cucumber --require #{@lib_path.join('guard/cucumber/notification_formatter.rb')} --format Guard::Cucumber::NotificationFormatter --out #{null_device} --color --require features features"
-      )
-      runner.run(['features'], { })
-    end
-
-    context 'with a command argument' do
-      it 'runs with the command argument' do
+    context 'with a :rvm option' do
+      it 'executes cucumber through the rvm versions' do
         runner.should_receive(:system).with(
-            "bundle exec cucumber --require #{@lib_path.join('guard/cucumber/notification_formatter.rb')} --format Guard::Cucumber::NotificationFormatter --out #{null_device} --color --require features --custom command features"
+            "rvm 1.8.7,1.9.2 exec bundle exec cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
         )
-        runner.run(['features'], { :command => "--custom command" })
+        runner.run(['features'], { :rvm => ['1.8.7', '1.9.2'] })
       end
+    end
 
-      it 'runs with a command argument that overwrites require' do
+    context 'with a :bundler option' do
+      it 'runs without bundler when false' do
         runner.should_receive(:system).with(
-            "bundle exec cucumber --require #{@lib_path.join('guard/cucumber/notification_formatter.rb')} --format Guard::Cucumber::NotificationFormatter --out #{null_device} --color --require features/support features"
+            "cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
         )
-        runner.run(['features'], { :command => "--require features/support" })
+        runner.run(['features'], { :bundler => false })
+      end
+    end
+
+    context 'with a :cli option' do
+      it 'appends the cli arguments when calling cucumber' do
+        runner.should_receive(:system).with(
+            "bundle exec cucumber --custom command --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
+        )
+        runner.run(['features'], { :cli => "--custom command" })
+      end
+    end
+
+    context 'with a :notification option' do
+      it 'does not add the guard notification listener' do
+        runner.should_receive(:system).with(
+            "bundle exec cucumber features"
+        )
+        runner.run(['features'], { :notification => false })
       end
     end
   end
+
 end
