@@ -5,7 +5,7 @@ It is tested on Ruby 1.8.7 & 1.9.2.
 
 ## Install
 
-Please be sure to have [Guard](http://github.com/guard/guard) installed before continue.
+Please be sure to have [Guard](https://github.com/guard/guard) installed before continue.
 
 Install the gem:
 
@@ -21,7 +21,7 @@ Add the default Guard::Cucumber template to your `Guardfile` by running this com
 
 ## Usage
 
-Please read the [Guard usage documentation](http://github.com/guard/guard#readme).
+Please read the [Guard usage documentation](https://github.com/guard/guard#readme).
 
 ## Guardfile
 
@@ -71,8 +71,8 @@ To use Guard::Cucumber with [Spork](https://github.com/timcharper/spork) (prefer
 
 ## Development
 
-- Source hosted at [GitHub](http://github.com/netzpirat/guard-cucumber)
-- Report issues/Questions/Feature requests on [GitHub Issues](http://github.com/netzpirat/guard-cucumber/issues)
+- Source hosted at [GitHub](https://github.com/netzpirat/guard-cucumber)
+- Report issues/Questions/Feature requests on [GitHub Issues](https://github.com/netzpirat/guard-cucumber/issues)
 
 Pull requests are very welcome! Make sure your patches are well tested.
 
