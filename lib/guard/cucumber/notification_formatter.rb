@@ -14,6 +14,8 @@ module Guard
 
       def after_features(features)
         icon, messages = '', []
+
+        # summary of the run
         [:failed, :skipped, :undefined, :pending, :passed].reverse.each do |status|
           if step_mother.steps(status).any?
             icon = icon_for(status)
@@ -22,6 +24,15 @@ module Guard
         end
 
         ::Guard::Notifier.notify messages.reverse.join(', '), :title => 'Cucumber Results', :image => icon
+
+        # details about failures, what to work on
+        if step_mother.steps(:failed).any?
+          icon = icon_for(:failed)
+          step_mother.steps(:failed).each do |step|
+            ::Guard::Notifier.notify step.name, :title => 'Failed Steps', :image => icon
+          end
+        end
+
       end
 
       private
