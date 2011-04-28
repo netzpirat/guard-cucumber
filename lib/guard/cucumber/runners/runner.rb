@@ -19,7 +19,10 @@ module Guard
           cmd << options[:cli] if options[:cli]
 
           if options[:notification] != false
-            cmd << "--require #{ File.expand_path(File.join(File.dirname(__FILE__), '..', 'notification_formatter.rb')) } --format Guard::Cucumber::NotificationFormatter --out #{ null_device }"
+            notification_formatter_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'notification_formatter.rb'))
+            cmd << "--require #{ notification_formatter_path }"
+            cmd << "--format Guard::Cucumber::NotificationFormatter"
+            cmd << "--out #{ null_device }"
             cmd << "--require features"
           end
 

@@ -26,13 +26,16 @@ module Guard
         ::Guard::Notifier.notify messages.reverse.join(', '), :title => 'Cucumber Results', :image => icon
 
         # details about failures, what to work on
-        if step_mother.steps(:failed).any?
-          icon = icon_for(:failed)
-          step_mother.steps(:failed).each do |step|
-            ::Guard::Notifier.notify step.name, :title => 'Failed Steps', :image => icon
+        [:failed, :pending, :undefined].each do |status|
+          if step_mother.steps(status).any?
+            icon = icon_for(status)
+            step_mother.steps(status).each do |step|
+              ::Guard::Notifier.notify step.name, :title => "#{status} steps", :image => icon
+            end
+
+            break
           end
         end
-
       end
 
       private
