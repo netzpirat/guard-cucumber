@@ -63,9 +63,9 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
 ## Spork configuration
 
 To use Guard::Cucumber with [Spork](https://github.com/timcharper/spork) (preferabbly managed through
-[Guard::Spork](https://github.com/guard/guard-spork)), you'll want to use the following configuration:
+[Guard::Spork](https://github.com/guard/guard-spork)), be sure to include the `--drb` switch:
 
-    guard 'cucumber', :cli => '--drb --require features/support --require features/step_definitions' do
+    guard 'cucumber', :cli => '--drb' do
       ...
     end
 

@@ -8,7 +8,7 @@ describe Guard::Cucumber::Runner do
     context 'with a :rvm option' do
       it 'executes cucumber through the rvm versions' do
         runner.should_receive(:system).with(
-            "rvm 1.8.7,1.9.2 exec bundle exec cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
+            "rvm 1.8.7,1.9.2 exec bundle exec cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features/support --require features/step_definitions features"
         )
         runner.run(['features'], { :rvm => ['1.8.7', '1.9.2'] })
       end
@@ -17,7 +17,7 @@ describe Guard::Cucumber::Runner do
     context 'with a :bundler option' do
       it 'runs without bundler when false' do
         runner.should_receive(:system).with(
-            "cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
+            "cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features/support --require features/step_definitions features"
         )
         runner.run(['features'], { :bundler => false })
       end
@@ -26,7 +26,7 @@ describe Guard::Cucumber::Runner do
     context 'with a :cli option' do
       it 'appends the cli arguments when calling cucumber' do
         runner.should_receive(:system).with(
-            "bundle exec cucumber --custom command --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
+            "bundle exec cucumber --custom command --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features/support --require features/step_definitions features"
         )
         runner.run(['features'], { :cli => "--custom command" })
       end
@@ -35,7 +35,7 @@ describe Guard::Cucumber::Runner do
     context 'with a :notification option' do
       it 'does not add the guard notification listener' do
         runner.should_receive(:system).with(
-            "bundle exec cucumber features"
+            "bundle exec cucumber --require features/support --require features/step_definitions features"
         )
         runner.run(['features'], { :notification => false })
       end
