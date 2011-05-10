@@ -1,7 +1,9 @@
 # Guard::Cucumber
 
+![travis-ci](http://travis-ci.org/netzpirat/guard-cucumber.png)
+
 Guard::Cucumber allows you to automatically run Cucumber features when files are modified.
-It is tested on Ruby 1.8.7 & 1.9.2.
+Tested on Ruby 1.8.7, 1.9.2, JRuby & Rubinius.
 
 ## Install
 
