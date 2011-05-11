@@ -83,8 +83,9 @@ Pull requests are very welcome! Make sure your patches are well tested.
 
 * [Oriol Gual](https://github.com/oriolgual)
 * [Aleksei Gusev](https://github.com/hron)
+* [Loren Norman](https://github.com/lorennorman)
 
-## Acknowledgment
+ ## Acknowledgment
 
 The [Guard Team](https://github.com/guard/guard/contributors) for giving us such a nice pice of software
 that is so easy to extend, one *has* to make a plugin for it!
