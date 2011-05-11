@@ -62,6 +62,9 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
     :bundler => false                 # Don't use "bundle exec" to run the Cucumber command, default: true
     :rvm => ['1.8.7', '1.9.2']        # Directly run your features on multiple ruby versions, default: nil
     :notification => false            # Don't display Growl (or Libnotify) notification, default: true
+    :all_after_pass => false          # don't run all features after changed features pass, default: true
+    :all_on_start => false            # don't run all the features at startup, default: true
+    :keep_failed => false             # keep failed features until them pass, default: true
 
 ## Spork configuration
 
@@ -85,7 +88,13 @@ Pull requests are very welcome! Make sure your patches are well tested.
 * [Aleksei Gusev](https://github.com/hron)
 * [Loren Norman](https://github.com/lorennorman)
 
- ## Acknowledgment
+Since guard-cucumber is very close to guard-rspec, some contributions by the following authors have been
+incorporated into guard-cucumber:
+
+* [Andre Arko](https://github.com/indirect)
+* [Thibaud Guillaume-Gentil](https://github.com/thibaudgg)
+
+## Acknowledgment
 
 The [Guard Team](https://github.com/guard/guard/contributors) for giving us such a nice pice of software
 that is so easy to extend, one *has* to make a plugin for it!

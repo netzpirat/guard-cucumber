@@ -5,6 +5,12 @@ describe Guard::Cucumber::Runner do
   let(:null_device) { RUBY_PLATFORM.index('mswin') ? 'NUL' : '/dev/null' }
 
   describe '#run' do
+    context "when passed an empty paths list" do
+      it "returns false" do
+        runner.run([]).should be_false
+      end
+    end
+
     context 'with a :rvm option' do
       it 'executes cucumber through the rvm versions' do
         runner.should_receive(:system).with(
