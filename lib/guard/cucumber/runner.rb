@@ -2,6 +2,7 @@ module Guard
   class Cucumber
     module Runner
       class << self
+
         def run(paths, options = {})
           message = options[:message] || (paths == ['features'] ? 'Run all Cucumber features' : "Run Cucumber features #{ paths.join(' ') }")
           UI.info message, :reset => true
@@ -19,7 +20,7 @@ module Guard
           cmd << options[:cli] if options[:cli]
 
           if options[:notification] != false
-            cmd << "--require #{ File.expand_path(File.join(File.dirname(__FILE__), '..', 'notification_formatter.rb')) } --format Guard::Cucumber::NotificationFormatter --out #{ null_device }"
+            cmd << "--require #{ File.expand_path(File.join(File.dirname(__FILE__), 'notification_formatter.rb')) } --format Guard::Cucumber::NotificationFormatter --out #{ null_device }"
             cmd << "--require features"
           end
 
