@@ -58,26 +58,26 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
 
 ### List of available options
 
-    :cli => '--profile guard -c' # Pass arbitrary Cucumber CLI arguments, 
-                                 # default: '--no-profile --color --format progress --strict'
+    :cli => '--profile guard -c'      # Pass arbitrary Cucumber CLI arguments, 
+                                      # default: '--no-profile --color --format progress --strict'
 
-    :bundler => false            # Don't use "bundle exec" to run the Cucumber command
-                                 # default: true
+    :bundler => false                 # Don't use "bundle exec" to run the Cucumber command
+                                      # default: true
 
-    :rvm => ['1.8.7', '1.9.2']   # Directly run your features on multiple ruby versions
-                                 # default: nil
+    :rvm => ['1.8.7', '1.9.2']        # Directly run your features on multiple ruby versions
+                                      # default: nil
 
-    :notification => false       # Don't display Growl (or Libnotify) notification
-                                 # default: true
+    :notification => false            # Don't display Growl (or Libnotify) notification
+                                      # default: true
 
-    :all_after_pass => false     # don't run all features after changed features pass
-                                 # default: true
+    :all_after_pass => false          # don't run all features after changed features pass
+                                      # default: true
 
-    :all_on_start => false       # don't run all the features at startup
-                                 # default: true
+    :all_on_start => false            # don't run all the features at startup
+                                      # default: true
 
-    :keep_failed => false        # keep failed features until them pass
-                                 # default: true
+    :keep_failed => false             # keep failed features until them pass
+                                      # default: true
 
 ## Cucumber configuration
 
