@@ -58,13 +58,26 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
 
 ### List of available options
 
-    :cli => '--profile guard -c' # Pass arbitrary Cucumber CLI arguments, default: '--no-profile --color --format progress --strict'
-    :bundler => false            # Don't use "bundle exec" to run the Cucumber command, default: true
-    :rvm => ['1.8.7', '1.9.2']   # Directly run your features on multiple ruby versions, default: nil
-    :notification => false       # Don't display Growl (or Libnotify) notification, default: true
-    :all_after_pass => false     # don't run all features after changed features pass, default: true
-    :all_on_start => false       # don't run all the features at startup, default: true
-    :keep_failed => false        # keep failed features until them pass, default: true
+    :cli => '--profile guard -c' # Pass arbitrary Cucumber CLI arguments, 
+                                 # default: '--no-profile --color --format progress --strict'
+
+    :bundler => false            # Don't use "bundle exec" to run the Cucumber command
+                                 # default: true
+
+    :rvm => ['1.8.7', '1.9.2']   # Directly run your features on multiple ruby versions
+                                 # default: nil
+
+    :notification => false       # Don't display Growl (or Libnotify) notification
+                                 # default: true
+
+    :all_after_pass => false     # don't run all features after changed features pass
+                                 # default: true
+
+    :all_on_start => false       # don't run all the features at startup
+                                 # default: true
+
+    :keep_failed => false        # keep failed features until them pass
+                                 # default: true
 
 ## Cucumber configuration
 
@@ -80,7 +93,7 @@ then the default profile forces guard-cucumber to always run all features, becau
 
 ### Configure Cucumber solely from Guard
 
-If you want to configure Cucumber from Guard solely, then you should either pass `--no-profile` to the `:cli` option.
+If you want to configure Cucumber from Guard solely, then you should pass `--no-profile` to the `:cli` option.
 
 Since guard-cucumber version 0.3.2, the default `:cli` options are:
 
