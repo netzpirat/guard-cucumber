@@ -13,7 +13,8 @@ module Guard
       @options = {
           :all_after_pass => true,
           :all_on_start => true,
-          :keep_failed => true
+          :keep_failed => true,
+          :cli => '--no-profile --color --format progress --strict'
       }.update(options)
 
       @last_failed = false

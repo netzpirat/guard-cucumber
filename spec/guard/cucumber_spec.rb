@@ -6,7 +6,7 @@ describe Guard::Cucumber do
     Dir.stub(:glob).and_return ['features/a.feature', 'features/subfolder/b.feature']
   end
 
-  let(:default_options) { { :all_after_pass => true, :all_on_start => true, :keep_failed => true } }
+  let(:default_options) { { :all_after_pass => true, :all_on_start => true, :keep_failed => true, :cli => '--no-profile --color --format progress --strict' } }
   let(:runner) { Guard::Cucumber::Runner }
   subject { Guard::Cucumber.new }
 
@@ -25,10 +25,14 @@ describe Guard::Cucumber do
       it 'sets a default :keep_failed option' do
         guard.options[:keep_failed].should be_true
       end
+
+      it 'sets a default :cli option' do
+        guard.options[:cli].should eql '--no-profile --color --format progress --strict'
+      end
     end
 
     context 'with other options than the default ones' do
-      let(:guard) { Guard::Cucumber.new(nil, { :all_after_pass => false, :all_on_start => false, :keep_failed => false }) }
+      let(:guard) { Guard::Cucumber.new(nil, { :all_after_pass => false, :all_on_start => false, :keep_failed => false, :cli => '--color' }) }
 
       it 'sets the provided :all_after_pass option' do
         guard.options[:all_after_pass].should be_false
@@ -40,6 +44,10 @@ describe Guard::Cucumber do
 
       it 'sets the provided :keep_failed option' do
         guard.options[:keep_failed].should be_false
+      end
+
+      it 'sets the provided :cli option' do
+        guard.options[:cli].should eql '--color'
       end
     end
   end
