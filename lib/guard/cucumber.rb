@@ -48,10 +48,23 @@ module Guard
         run_all if @last_failed && @options[:all_after_pass]
       else
         # remember failed paths for the next change
-        @failed_paths += paths if @options[:keep_failed]
+        @failed_paths += read_failed_features if @options[:keep_failed]
         # track whether the changed feature failed for the next change
         @last_failed = true
       end
+    end
+
+    private
+
+    def read_failed_features
+      failed = []
+
+      if File.exist?('rerun.txt')
+        failed = File.open('rerun.txt').read.split(' ')
+        File.delete('rerun.txt')
+      end
+
+      failed
     end
 
   end

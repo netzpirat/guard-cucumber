@@ -144,6 +144,9 @@ describe Guard::Cucumber do
 
     it 'should keep failed spec and rerun later' do
       Guard::Cucumber::Runner.should_receive(:run).with(['features/foo'], default_options).and_return(false)
+      File.should_receive(:exist?).with('rerun.txt').and_return true
+      File.stub_chain(:open, :read).and_return 'features/foo'
+      File.should_receive(:delete).with('rerun.txt')
       subject.run_on_change(['features/foo'])
       Guard::Cucumber::Runner.should_receive(:run).with(['features/bar', 'features/foo'], default_options).and_return(true)
       Guard::Cucumber::Runner.should_receive(:run).with(['features'], default_options.merge(:message => 'Running all features')).and_return(true)
