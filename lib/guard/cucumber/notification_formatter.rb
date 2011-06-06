@@ -17,7 +17,7 @@ module Guard
 
       def after_features(features)
         notify_summary
-        write_rerun_features
+        write_rerun_features if !@file_names.empty?
       end
 
       def before_feature_element(feature_element)
