@@ -31,9 +31,9 @@ Please read the [Guard usage documentation](https://github.com/guard/guard#readm
 Guard::Cucumber can be adapted to all kind of projects and comes with a default template that looks like this:
 
     guard 'cucumber' do
-      watch(%r{features/.+\.feature})
-      watch(%r{features/support/.+})                      { 'features' }
-      watch(%r{features/step_definitions/(.+)_steps\.rb}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
+      watch(%r{^features/.+\.feature$})
+      watch(%r{^features/support/.+$})          { 'features' }
+      watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
     end
 
 Expressed in plain English, this configuration tells Guard::Cucumber:
