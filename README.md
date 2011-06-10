@@ -115,7 +115,7 @@ something like this:
 
     guard: --format progress --strict --tags ~@wip
 
-Now you want to make guard-cucumber use that profile by passing '--profile guard` to the `:cli`.
+Now you want to make guard-cucumber use that profile by passing '--profile guard' to the `:cli`.
 
 ## Cucumber with Spork
 
