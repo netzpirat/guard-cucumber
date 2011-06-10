@@ -6,21 +6,29 @@ Guard::Cucumber allows you to automatically run Cucumber features when files are
 
 Tested on MRI Ruby 1.8.6, 1.8.7, 1.9.2 and the latest versions of JRuby & Rubinius.
 
+If you have any questions/issues please join us on our [Google group](http://groups.google.com/group/guard-dev) or on `#guard` (irc.freenode.net).
+
 ## Install
 
 Please be sure to have [Guard](https://github.com/guard/guard) installed before continue.
 
 Install the gem:
 
-    gem install guard-cucumber
+```bash
+$ gem install guard-cucumber
+```
 
 Add it to your `Gemfile`, preferably inside the test group:
 
-    gem 'guard-cucumber'
+```ruby
+gem 'guard-cucumber'
+```
 
 Add the default Guard::Cucumber template to your `Guardfile` by running this command:
 
-    guard init cucumber
+```bash
+$ guard init cucumber
+```
 
 ## Usage
 
@@ -30,11 +38,13 @@ Please read the [Guard usage documentation](https://github.com/guard/guard#readm
 
 Guard::Cucumber can be adapted to all kind of projects and comes with a default template that looks like this:
 
-    guard 'cucumber' do
-      watch(%r{^features/.+\.feature$})
-      watch(%r{^features/support/.+$})          { 'features' }
-      watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
-    end
+```ruby
+guard 'cucumber' do
+  watch(%r{^features/.+\.feature$})
+  watch(%r{^features/support/.+$})                      { 'features' }
+  watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
+end
+```
 
 Expressed in plain English, this configuration tells Guard::Cucumber:
 
@@ -50,38 +60,41 @@ Please read the [Guard documentation](http://github.com/guard/guard#readme) for 
 
 You can pass any of the standard Cucumber CLI options using the :cli option:
 
-    guard 'cucumber', :cli => '-c --drb --port 1234 --profile guard' do
-      ...
-    end
+```ruby
+guard 'cucumber', :cli => '-c --drb --port 1234 --profile guard' do
+end
+```
 
 Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and have no effect anymore.
 
 ### List of available options
 
-    :cli => '--profile guard -c'      # Pass arbitrary Cucumber CLI arguments, 
-                                      # default: '--no-profile --color --format progress --strict'
+```ruby
+:cli => '--profile guard -c'      # Pass arbitrary Cucumber CLI arguments, 
+                                  # default: '--no-profile --color --format progress --strict'
 
-    :bundler => false                 # Don't use "bundle exec" to run the Cucumber command
-                                      # default: true
+:bundler => false                 # Don't use "bundle exec" to run the Cucumber command
+                                  # default: true
 
-    :rvm => ['1.8.7', '1.9.2']        # Directly run your features on multiple ruby versions
-                                      # default: nil
+:rvm => ['1.8.7', '1.9.2']        # Directly run your features on multiple ruby versions
+                                  # default: nil
 
-    :notification => false            # Don't display Growl (or Libnotify) notification
-                                      # default: true
+:notification => false            # Don't display Growl (or Libnotify) notification
+                                  # default: true
 
-    :all_after_pass => false          # Don't run all features after changed features pass
-                                      # default: true
+:all_after_pass => false          # Don't run all features after changed features pass
+                                  # default: true
 
-    :all_on_start => false            # Don't run all the features at startup
-                                      # default: true
+:all_on_start => false            # Don't run all the features at startup
+                                  # default: true
 
-    :keep_failed => false             # Keep failed features until them pass
-                                      # default: true
+:keep_failed => false             # Keep failed features until them pass
+                                  # default: true
 
-    :change_format => 'pretty'        # Use a different cucumber format when running individual features
-                                      # This replaces the Cucumber --format option within the :cli option
-                                      # default: nil
+:change_format => 'pretty'        # Use a different cucumber format when running individual features
+                                  # This replaces the Cucumber --format option within the :cli option
+                                  # default: nil
+```
 
 ## Cucumber configuration
 
@@ -101,7 +114,9 @@ If you want to configure Cucumber from Guard solely, then you should pass `--no-
 
 Since guard-cucumber version 0.3.2, the default `:cli` options are:
 
-    --no-profile --color --format progress --strict
+```ruby
+:cli => '--no-profile --color --format progress --strict'
+```
 
 This default configuration has been chosen to avoid strange behavior when mixing configurations form
 the cucumber.yml default profile with the guard-cucumber `:cli` option.
@@ -113,7 +128,9 @@ You can safely remove `config/cucumber.yml`, since all configuration is done in 
 If you're using different profiles with Cucumber then you should create a profile for Guard in cucumber.yml,
 something like this:
 
-    guard: --format progress --strict --tags ~@wip
+```
+guard: --format progress --strict --tags ~@wip
+```
 
 Now you want to make guard-cucumber use that profile by passing '--profile guard' to the `:cli`.
 
@@ -122,20 +139,22 @@ Now you want to make guard-cucumber use that profile by passing '--profile guard
 To use Guard::Cucumber with [Spork](https://github.com/timcharper/spork), you should install
 [Guard::Spork](https://github.com/guard/guard-spork)) and use the following configuration:
 
-    guard 'spork' do
-      watch('config/application.rb')
-      watch('config/environment.rb')
-      watch(%r{^config/environments/.*\.rb$})
-      watch(%r{^config/initializers/.*\.rb$})
-      watch('spec/spec_helper.rb')
-    end
+```ruby
+guard 'spork' do
+  watch('config/application.rb')
+  watch('config/environment.rb')
+  watch(%r{^config/environments/.*\.rb$})
+  watch(%r{^config/initializers/.*\.rb$})
+  watch('spec/spec_helper.rb')
+end
 
-    guard 'cucumber, :cli => '--drb --format progress --no-profile' do
-      watch(%r{^features/.+\.feature$})
-      watch(%r{^features/support/.+$})          { 'features' }
-      watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
-    end
-    
+guard 'cucumber, :cli => '--drb --format progress --no-profile' do
+  watch(%r{^features/.+\.feature$})
+  watch(%r{^features/support/.+$})                      { 'features' }
+  watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
+end
+```
+
 ## Development
 
 - Source hosted at [GitHub](https://github.com/netzpirat/guard-cucumber)
