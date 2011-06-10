@@ -79,6 +79,9 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
     :keep_failed => false             # keep failed features until them pass
                                       # default: true
 
+    :change_format => 'pretty'        # use a different cucumber format when running individual features
+                                      # default: nil
+
 ## Cucumber configuration
 
 It's **very important** that you understand how Cucumber gets configured, because it's often the origin of
