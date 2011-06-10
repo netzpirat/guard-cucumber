@@ -6,7 +6,7 @@ Guard::Cucumber allows you to automatically run Cucumber features when files are
 
 Tested on MRI Ruby 1.8.6, 1.8.7, 1.9.2 and the latest versions of JRuby & Rubinius.
 
-If you have any questions/issues please join us on our [Google group](http://groups.google.com/group/guard-dev) or on `#guard` (irc.freenode.net).
+If you have any questions please join us on our [Google group](http://groups.google.com/group/guard-dev) or on `#guard` (irc.freenode.net).
 
 ## Install
 
@@ -158,9 +158,11 @@ end
 ## Development
 
 - Source hosted at [GitHub](https://github.com/netzpirat/guard-cucumber)
-- Report issues/Questions/Feature requests on [GitHub Issues](https://github.com/netzpirat/guard-cucumber/issues)
+- Report issues and feature requests to [GitHub Issues](https://github.com/netzpirat/guard-cucumber/issues)
 
 Pull requests are very welcome! Make sure your patches are well tested.
+
+For questions please join us on our [Google group](http://groups.google.com/group/guard-dev) or on `#guard` (irc.freenode.net).
 
 ## Contributors
 
