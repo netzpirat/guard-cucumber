@@ -70,16 +70,17 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
     :notification => false            # Don't display Growl (or Libnotify) notification
                                       # default: true
 
-    :all_after_pass => false          # don't run all features after changed features pass
+    :all_after_pass => false          # Don't run all features after changed features pass
                                       # default: true
 
-    :all_on_start => false            # don't run all the features at startup
+    :all_on_start => false            # Don't run all the features at startup
                                       # default: true
 
-    :keep_failed => false             # keep failed features until them pass
+    :keep_failed => false             # Keep failed features until them pass
                                       # default: true
 
-    :change_format => 'pretty'        # use a different cucumber format when running individual features
+    :change_format => 'pretty'        # Use a different cucumber format when running individual features
+                                      # This replaces the Cucumber --format option within the :cli option
                                       # default: nil
 
 ## Cucumber configuration
