@@ -39,7 +39,7 @@ module Guard
     def run_on_change(paths)
       paths += @failed_paths if @options[:keep_failed]
       paths = Inspector.clean(paths)
-      options = @options[:failure_format] ? change_format(@options[:failure_format]) : @options
+      options = @options[:change_format] ? change_format(@options[:change_format]) : @options
       passed = Runner.run(paths, paths.include?('features') ? options.merge({ :message => 'Running all features' }) : options)
 
       if passed
