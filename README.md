@@ -144,9 +144,10 @@ Pull requests are very welcome! Make sure your patches are well tested.
 
 ## Contributors
 
-* [Oriol Gual](https://github.com/oriolgual)
 * [Aleksei Gusev](https://github.com/hron)
 * [Loren Norman](https://github.com/lorennorman)
+* [Nicholas A Clark](https://github.com/NickClark)
+* [Oriol Gual](https://github.com/oriolgual)
 
 Since guard-cucumber is very close to guard-rspec, some contributions by the following authors have been
 incorporated into guard-cucumber:
