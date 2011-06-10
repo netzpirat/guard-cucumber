@@ -154,5 +154,13 @@ describe Guard::Cucumber do
       Guard::Cucumber::Runner.should_receive(:run).with(['features/bar'], default_options).and_return(true)
       subject.run_on_change(['features/bar'])
     end
+
+    it "should use the failure formatter if one is given" do
+      cli = "-c --format progress --format OtherFormatter --out /dev/null --profile guard"
+      expected_cli = "-c --format pretty --format OtherFormatter --out /dev/null --profile guard"
+      subject = Guard::Cucumber.new([], default_options.merge(:cli => cli, :failure_format => 'pretty'))
+      Guard::Cucumber::Runner.should_receive(:run).with(['features/bar'], default_options.merge(:failure_format => "pretty", :cli => expected_cli))
+      subject.run_on_change(['features/bar'])
+    end
   end
 end
