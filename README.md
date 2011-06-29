@@ -170,6 +170,7 @@ For questions please join us on our [Google group](http://groups.google.com/grou
 * [Loren Norman](https://github.com/lorennorman)
 * [Nicholas A Clark](https://github.com/NickClark)
 * [Oriol Gual](https://github.com/oriolgual)
+* [Robert Sanders](https://github.com/robertzx)
 
 Since guard-cucumber is very close to guard-rspec, some contributions by the following authors have been
 incorporated into guard-cucumber:
