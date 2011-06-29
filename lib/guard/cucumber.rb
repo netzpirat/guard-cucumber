@@ -30,10 +30,14 @@ module Guard
 
       @failed_paths = [] if passed
       @last_failed = !passed
+      
+      passed
     end
 
     def reload
       @failed_paths = []
+      
+      true
     end
 
     def run_on_change(paths)
@@ -53,6 +57,8 @@ module Guard
         # track whether the changed feature failed for the next change
         @last_failed = true
       end
+      
+      passed
     end
 
     private
