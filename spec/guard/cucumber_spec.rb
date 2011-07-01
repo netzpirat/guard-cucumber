@@ -85,6 +85,31 @@ describe Guard::Cucumber do
       Guard::Cucumber::Runner.should_receive(:run).with(['features/bar'], default_options).and_return(true)
       subject.run_on_change(['features/bar'])
     end
+
+    it 'should save failed features' do
+      Guard::Cucumber::Runner.should_receive(:run).with(['features'], default_options.merge(:message => 'Running all features')).and_return(false)
+      File.should_receive(:exist?).with('rerun.txt').and_return true
+      File.stub_chain(:open, :read).and_return 'features/foo'
+      File.should_receive(:delete).with('rerun.txt')
+      subject.run_all
+
+      Guard::Cucumber::Runner.should_receive(:run).with(['features/bar', 'features/foo'], default_options).and_return(true)
+      Guard::Cucumber::Runner.should_receive(:run).with(['features'], default_options.merge(:message => 'Running all features')).and_return(true)
+      subject.run_on_change(['features/bar'])
+    end
+
+    it 'should not save failed features if keep_failed is disabled' do
+      run_options = default_options.merge :keep_failed => false
+      subject = Guard::Cucumber.new([], :keep_failed => false)
+
+      Guard::Cucumber::Runner.should_receive(:run).with(['features'], run_options.merge(:message => 'Running all features')).and_return(false)
+      File.should_not_receive(:exist?).with('rerun.txt').and_return true
+      subject.run_all
+
+      Guard::Cucumber::Runner.should_receive(:run).with(['features/bar'], run_options).and_return(true)
+      Guard::Cucumber::Runner.should_receive(:run).with(['features'], run_options.merge(:message => 'Running all features')).and_return(true)
+      subject.run_on_change(['features/bar'])
+    end
   end
 
   describe '#reload' do
