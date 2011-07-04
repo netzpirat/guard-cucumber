@@ -167,6 +167,7 @@ For questions please join us on our [Google group](http://groups.google.com/grou
 ## Contributors
 
 * [Aleksei Gusev](https://github.com/hron)
+* [Larry Marburger](https://github.com/lmarburger)
 * [Loren Norman](https://github.com/lorennorman)
 * [Nicholas A Clark](https://github.com/NickClark)
 * [Oriol Gual](https://github.com/oriolgual)
