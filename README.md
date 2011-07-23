@@ -155,7 +155,7 @@ guard 'cucumber', :cli => '--drb --format progress --no-profile' do
 end
 ```
 
-There is a section with alternative configurations in the [Wiki](https://github.com/netzpirat/guard-cucumber/wiki/Spork-configurations).
+There is a section with alternative configurations on the [Wiki](https://github.com/netzpirat/guard-cucumber/wiki/Spork-configurations).
 
 ## Development
 
