@@ -137,7 +137,7 @@ Now you want to make guard-cucumber use that profile by passing '--profile guard
 ## Cucumber with Spork
 
 To use Guard::Cucumber with [Spork](https://github.com/timcharper/spork), you should install
-[Guard::Spork](https://github.com/guard/guard-spork)) and use the following configuration:
+[Guard::Spork](https://github.com/guard/guard-spork) and use the following configuration:
 
 ```ruby
 guard 'spork' do
@@ -154,6 +154,8 @@ guard 'cucumber', :cli => '--drb --format progress --no-profile' do
   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
 end
 ```
+
+There is a section with alternative configurations in the [Wiki](https://github.com/netzpirat/guard-cucumber/wiki/Spork-configurations).
 
 ## Development
 
