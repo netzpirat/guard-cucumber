@@ -19,7 +19,7 @@ module Guard
         end
 
         def cucumber_file?(path)
-          cucumber_files.include?(path)
+          cucumber_files.include?(path.split(':').first)
         end
 
         def cucumber_files
