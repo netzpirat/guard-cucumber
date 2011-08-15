@@ -28,8 +28,7 @@ module Guard
 
       def after_feature_element(feature_element)
         if @rerun
-          file, line = *feature_element.file_colon_line.split(':')
-          @file_names << file
+          @file_names << *feature_element.file_colon_line
         end
       end
 
@@ -38,6 +37,8 @@ module Guard
           @rerun = true
           step_name = step_match.format_args(lambda { |param| "*#{ param }*" })
           ::Guard::Notifier.notify step_name, :title => @feature_name, :image => icon_for(status)
+        else
+          @rerun = false
         end
       end
 
