@@ -110,6 +110,12 @@ describe Guard::Cucumber do
       Guard::Cucumber::Runner.should_receive(:run).with(['features'], run_options.merge(:message => 'Running all features')).and_return(true)
       subject.run_on_change(['features/bar'])
     end
+    
+    it 'allows the :run_all options to override the default_options' do
+      subject = Guard::Cucumber.new([], { :rvm => ['1.8.7', '1.9.2'], :cli => '--color', :run_all => { :cli => '--format progress' } })
+      Guard::Cucumber::Runner.should_receive(:run).with(anything, hash_including(:cli => '--format progress', :rvm => ['1.8.7', '1.9.2']))
+      subject.run_all
+    end
   end
 
   describe '#reload' do

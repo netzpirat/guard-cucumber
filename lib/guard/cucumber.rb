@@ -26,7 +26,7 @@ module Guard
     end
 
     def run_all
-      passed = Runner.run(['features'], options.merge({ :message => 'Running all features' }))
+      passed = Runner.run(['features'], options.merge(options[:run_all] || {}).merge(:message => 'Running all features'))
 
       if passed
         @failed_paths = []

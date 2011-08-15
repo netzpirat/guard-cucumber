@@ -91,6 +91,9 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
 :keep_failed => false             # Keep failed features until them pass
                                   # default: true
 
+:run_all => { :cli => "-p" }      # Override any option when running all specs
+                                  # default: {}
+
 :change_format => 'pretty'        # Use a different cucumber format when running individual features
                                   # This replaces the Cucumber --format option within the :cli option
                                   # default: nil
