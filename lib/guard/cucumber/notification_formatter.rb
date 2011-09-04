@@ -44,11 +44,12 @@ module Guard
       private
 
       def notify_summary
-        icon, messages = '', []
+        icon, messages = nil, []
 
         [:failed, :skipped, :undefined, :pending, :passed].reverse.each do |status|
           if step_mother.steps(status).any?
-            icon = icon_for(status)
+            step_icon = icon_for(status)
+            icon = step_icon if step_icon
             messages << dump_count(step_mother.steps(status).length, 'step', status.to_s)
           end
         end
@@ -70,6 +71,8 @@ module Guard
             :pending
           when :failed
             :failed
+          else
+            nil
         end
       end
 
