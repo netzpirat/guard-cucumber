@@ -141,7 +141,7 @@ There is a section with alternative configurations on the [Wiki](https://github.
 
 ## Development
 
-- Documentation hosted at [RubyDoc](http://rubydoc.info/gems/guard-cucumber/file/README.md).
+- Documentation hosted at [RubyDoc](http://rubydoc.info/gems/guard-cucumber/frames).
 - Source hosted at [GitHub](https://github.com/netzpirat/guard-cucumber).
 - Report issues and feature requests to [GitHub Issues](https://github.com/netzpirat/guard-cucumber/issues).
 
