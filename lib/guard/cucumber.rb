@@ -3,30 +3,56 @@ require 'guard/guard'
 require 'cucumber'
 
 module Guard
+
+  # The Cucumber guard that gets notifications about the following
+  # Guard events: `start`, `stop`, `reload`, `run_all` and `run_on_change`.
+  #
   class Cucumber < Guard
 
     autoload :Runner, 'guard/cucumber/runner'
     autoload :Inspector, 'guard/cucumber/inspector'
 
-    def initialize(watchers=[], options={})
+    # Initialize Guard::Cucumber.
+    #
+    # @param [Array<Guard::Watcher>] watchers the watchers in the Guard block
+    # @param [Hash] options the options for the Guard
+    # @option options [String] :cli any arbitrary Cucumber CLI arguments
+    # @option options [Boolean] :bundler use bundler or not
+    # @option options [Array<String>] :rvm a list of rvm version to use for the test
+    # @option options [Boolean] :notification show notifications
+    # @option options [Boolean] :all_after_pass run all features after changed features pass
+    # @option options [Boolean] :all_on_start run all the features at startup
+    # @option options [Boolean] :keep_failed Keep failed features until they pass
+    # @option options [Boolean] :run_all run override any option when running all specs
+    # @option options [Boolean] :change_format use a different cucumber format when running individual features
+    #
+    def initialize(watchers = [], options = { })
       super
       @options = {
           :all_after_pass => true,
-          :all_on_start => true,
-          :keep_failed => true,
-          :cli => '--no-profile --color --format progress --strict'
+          :all_on_start   => true,
+          :keep_failed    => true,
+          :cli            => '--no-profile --color --format progress --strict'
       }.update(options)
 
-      @last_failed = false
+      @last_failed  = false
       @failed_paths = []
     end
 
+    # Gets called once when Guard starts.
+    #
+    # @return [Boolean] when the start was successful
+    #
     def start
       run_all if @options[:all_on_start]
     end
 
+    # Gets called when all specs should be run.
+    #
+    # @return [Boolean] when running all specs was successful
+    #
     def run_all
-      passed = Runner.run(['features'], options.merge(options[:run_all] || {}).merge(:message => 'Running all features'))
+      passed = Runner.run(['features'], options.merge(options[:run_all] || { }).merge(:message => 'Running all features'))
 
       if passed
         @failed_paths = []
@@ -35,21 +61,30 @@ module Guard
       end
 
       @last_failed = !passed
-      
+
       passed
     end
 
+    # Gets called when the Guard should reload itself.
+    #
+    # @return [Boolean] when reloading was successful
+    #
     def reload
       @failed_paths = []
-      
+
       true
     end
 
+    # Gets called when watched paths and files have changes.
+    #
+    # @param [Array<String>] paths the changed paths and files
+    # @return [Boolean] when running the changed specs was successful
+    #
     def run_on_change(paths)
       paths += @failed_paths if @options[:keep_failed]
-      paths = Inspector.clean(paths)
+      paths   = Inspector.clean(paths)
       options = @options[:change_format] ? change_format(@options[:change_format]) : @options
-      passed = Runner.run(paths, paths.include?('features') ? options.merge({ :message => 'Running all features' }) : options)
+      passed  = Runner.run(paths, paths.include?('features') ? options.merge({ :message => 'Running all features' }) : options)
 
       if passed
         # clean failed paths memory
@@ -62,12 +97,15 @@ module Guard
         # track whether the changed feature failed for the next change
         @last_failed = true
       end
-      
-      passed
     end
 
     private
 
+    # Read the failed features that from `rerun.txt`
+    #
+    # @see Guard::Cucumber::NotificationFormatter#write_rerun_features
+    # @return [Array<String>] the list of features
+    #
     def read_failed_features
       failed = []
 
@@ -79,6 +117,11 @@ module Guard
       failed
     end
 
+    # Change the `--format` cli option.
+    #
+    # @param [String] format the new format
+    # @return [Hash] the new options
+    #
     def change_format(format)
       cli_parts = @options[:cli].split(" ")
       cli_parts.each_with_index do |part, index|
