@@ -1,6 +1,6 @@
 module Guard
   module CucumberVersion
     # Guard::Cucumber version that is used for the Gem specification
-    VERSION = '0.6.3'
+    VERSION = '0.7.0'
   end
 end
