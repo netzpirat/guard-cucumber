@@ -62,7 +62,7 @@ module Guard
 
       @last_failed = !passed
 
-      throw :task_has_failed unless passed
+      #throw :task_has_failed unless passed
     end
 
     # Gets called when the Guard should reload itself.
@@ -96,7 +96,7 @@ module Guard
         @last_failed = true
       end
 
-      throw :task_has_failed unless passed
+      #throw :task_has_failed unless passed
     end
 
     private
