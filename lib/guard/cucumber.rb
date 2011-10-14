@@ -110,7 +110,7 @@ module Guard
       failed = []
 
       if File.exist?('rerun.txt')
-        failed = File.open('rerun.txt').read.split(' ')
+        failed = File.open('rerun.txt') { |file| file.read.split(' ') }
         File.delete('rerun.txt')
       end
 

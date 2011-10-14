@@ -95,7 +95,9 @@ describe Guard::Cucumber do
     it 'saves failed features' do
       runner.should_receive(:run).with(['features'], default_options.merge(:message => 'Running all features')).and_return(false)
       File.should_receive(:exist?).with('rerun.txt').and_return true
-      File.stub_chain(:open, :read).and_return 'features/foo'
+      file = mock('file')
+      file.should_receive(:read).and_return 'features/foo'
+      File.stub(:open).and_yield file
       File.should_receive(:delete).with('rerun.txt')
       expect { guard.run_all }.to throw_symbol :task_has_failed
 
@@ -203,7 +205,9 @@ describe Guard::Cucumber do
 
     context 'with a rerun.txt file' do
       before do
-        File.stub_chain(:open, :read).and_return 'features/foo'
+        file = mock('file')
+        file.stub(:read).and_return 'features/foo'
+        File.stub(:open).and_yield file
       end
 
       it 'keeps failed spec and rerun later' do
