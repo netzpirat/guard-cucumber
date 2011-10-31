@@ -19,7 +19,7 @@ group :development do
 end
 ```
 
-Add the default Guard::Cucumber template to your `Guardfile` by running this command:
+Add the default Guard::Cucumber template to your `Guardfile` by running:
 
 ```bash
 $ guard init cucumber
