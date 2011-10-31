@@ -5,6 +5,7 @@ pkg/*
 doc
 Gemfile.lock
 *.rbc
+.rbx
 
 ## MAC OS
 .DS_Store
