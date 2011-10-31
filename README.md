@@ -158,7 +158,7 @@ Issues
 ------
 
 You can report issues and feature requests to [GitHub Issues](https://github.com/netzpirat/guard-cucumber/issues). Try to figure out
-where the issue belongs to: Is it an issue with Guard itself or with a Guard implementation you're using? Please don't
+where the issue belongs to: Is it an issue with Guard itself or with Guard::Cucumber? Please don't
 ask question in the issue tracker, instead join us in our [Google group](http://groups.google.com/group/guard-dev) or on
 `#guard` (irc.freenode.net).
 
