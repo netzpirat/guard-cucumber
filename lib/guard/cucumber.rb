@@ -1,6 +1,7 @@
 require 'guard'
 require 'guard/guard'
 require 'cucumber'
+require 'guard/cucumber/version'
 
 module Guard
 
