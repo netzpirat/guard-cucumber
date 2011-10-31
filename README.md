@@ -8,18 +8,15 @@ If you have any questions please join us on our [Google group](http://groups.goo
 
 ## Install
 
-Please be sure to have [Guard](https://github.com/guard/guard) installed before continue.
+The simplest way to install Guard is to use [Bundler](http://gembundler.com/).
+Please make sure to have [Guard](https://github.com/guard/guard) installed before continue.
 
-Install the gem:
-
-```bash
-$ gem install guard-cucumber
-```
-
-Add it to your `Gemfile`, preferably inside the test group:
+Add Guard::Cucumber to your `Gemfile`:
 
 ```bash
-gem 'guard-cucumber'
+group :development do
+  gem 'guard-cucumber'
+end
 ```
 
 Add the default Guard::Cucumber template to your `Guardfile` by running this command:
@@ -157,21 +154,37 @@ end
 
 There is a section with alternative configurations on the [Wiki](https://github.com/netzpirat/guard-cucumber/wiki/Spork-configurations).
 
+Issues
+------
+
+You can report issues and feature requests to [GitHub Issues](https://github.com/netzpirat/guard-cucumber/issues). Try to figure out
+where the issue belongs to: Is it an issue with Guard itself or with a Guard implementation you're using? Please don't
+ask question in the issue tracker, instead join us in our [Google group](http://groups.google.com/group/guard-dev) or on
+`#guard` (irc.freenode.net).
+
+When you file an issue, please try to follow to these simple rules if applicable:
+
+* Make sure you run Guard with `bundle exec` first.
+* Add debug information to the issue by running Guard with the `--debug` option.
+* Add your `Guardfile` and `Gemfile` to the issue.
+* Make sure that the issue is reproducible with your description.
+
 ## Development
 
 - Documentation hosted at [RubyDoc](http://rubydoc.info/github/guard/guard-cucumber/master/frames).
 - Source hosted at [GitHub](https://github.com/netzpirat/guard-cucumber).
-- Report issues and feature requests to [GitHub Issues](https://github.com/netzpirat/guard-cucumber/issues).
 
-Pull requests are very welcome! Please try to follow these simple "rules", though:
+Pull requests are very welcome! Please try to follow these simple rules if applicable:
 
-- Please create a topic branch for every separate change you make.
-- Make sure your patches are well tested.
-- Update the README (if applicable).
-- Please **do not change** the version number.
+* Please create a topic branch for every separate change you make.
+* Make sure your patches are well tested.
+* Update the [Yard](http://yardoc.org/) documentation.
+* Update the README.
+* Update the CHANGELOG for noteworthy changes.
+* Please **do not change** the version number.
 
-For questions please join us on our [Google group](http://groups.google.com/group/guard-dev) or on `#guard` (irc.freenode.net).
-
+For questions please join us in our [Google group](http://groups.google.com/group/guard-dev) or on
+`#guard` (irc.freenode.net).
 ## Contributors
 
 * [Aleksei Gusev](https://github.com/hron)
