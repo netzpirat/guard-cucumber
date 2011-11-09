@@ -185,11 +185,13 @@ Pull requests are very welcome! Please try to follow these simple rules if appli
 
 For questions please join us in our [Google group](http://groups.google.com/group/guard-dev) or on
 `#guard` (irc.freenode.net).
+
 ## Contributors
 
 * [Aleksei Gusev](https://github.com/hron)
 * [Larry Marburger](https://github.com/lmarburger)
 * [Loren Norman](https://github.com/lorennorman)
+* [Neil Matatall](https://github.com/oreoshake)
 * [Nicholas A Clark](https://github.com/NickClark)
 * [Oriol Gual](https://github.com/oriolgual)
 * [Robert Sanders](https://github.com/robertzx)
