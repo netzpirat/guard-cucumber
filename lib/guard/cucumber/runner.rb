@@ -18,7 +18,7 @@ module Guard
         def run(paths, options = { })
           return false if paths.empty?
 
-          message = options[:message] || (paths == ['features'] ? 'Run all Cucumber features' : "Run Cucumber features #{ paths.join(' ') }")
+          message = options[:message] || (paths == ['features'] ? "Running all Cucumber features: #{ cucumber_command(paths, options) }" : "Running Cucumber features: #{ cucumber_command(paths, options) }")
           UI.info message, :reset => true
 
           system(cucumber_command(paths, options))
