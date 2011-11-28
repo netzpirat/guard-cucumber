@@ -70,6 +70,9 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
 :bundler => false                 # Don't use "bundle exec" to run the Cucumber command
                                   # default: true
 
+:binstubs => true                 # use "bin/cucumber" to run the Cucumber command (implies :bundler => true)
+                                  # default: false
+
 :rvm => ['1.8.7', '1.9.2']        # Directly run your features on multiple ruby versions
                                   # default: nil
 
