@@ -192,6 +192,7 @@ For questions please join us in our [Google group](http://groups.google.com/grou
 ## Contributors
 
 * [Aleksei Gusev](https://github.com/hron)
+* [Hedgehog](https://github.com/hedgehog)
 * [Larry Marburger](https://github.com/lmarburger)
 * [Loren Norman](https://github.com/lorennorman)
 * [Neil Matatall](https://github.com/oreoshake)
