@@ -18,7 +18,7 @@ module Guard
         def run(paths, options = { })
           return false if paths.empty?
 
-          message = options[:message] || (paths == ['features'] ? "Running all Cucumber features: #{ cucumber_command(paths, options) }" : "Running Cucumber features: #{ cucumber_command(paths, options) }")
+          message = options[:message] || (paths == ['features'] ? 'Run all Cucumber features' : "Run Cucumber features #{ paths.join(' ') }")
           UI.info message, :reset => true
 
           system(cucumber_command(paths, options))
@@ -38,8 +38,9 @@ module Guard
         def cucumber_command(paths, options)
           cmd = []
           cmd << "rvm #{options[:rvm].join(',')} exec" if options[:rvm].is_a?(Array)
-          cmd << 'bundle exec' if (bundler? && options[:bundler] != false) || (bundler? && options[:binstubs].is_a?(TrueClass))
-          cmd << cucumber_exec(options)
+          cmd << 'bundle exec' if bundler? && options[:bundler] != false
+
+          cmd << 'cucumber'
           cmd << options[:cli] if options[:cli]
 
           if options[:notification] != false
@@ -51,14 +52,6 @@ module Guard
           end
 
           (cmd + paths).join(' ')
-        end
-
-        # Simple test if binstubs prefix should be used.
-        #
-        # @return [String] Cucumber executable
-        #
-        def cucumber_exec(options = {})
-            options[:binstubs] == true && ( bundler? || options[:bundler] != false ) ? "bin/cucumber" : "cucumber"
         end
 
         # Simple test if bundler should be used. it just checks for the `Gemfile`.

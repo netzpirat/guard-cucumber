@@ -66,9 +66,9 @@ module Guard
         #
         def included_in_other_path?(path, paths)
           paths = paths.select { |p| p != path }
-          massaged = path[0...(path.index(":")||path.size)]
-          paths.any? { |p| (path.include?(p) && (path.gsub(p, '')).include?('/')) || massaged.include?(p) }
+          paths.any? { |p| path.include?(p) && (path.gsub(p, '')).include?('/') }
         end
+
       end
     end
   end
