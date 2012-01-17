@@ -1,20 +1,17 @@
-source :rubygems
+source 'http://rubygems.org'
 
+# Specify your gem's dependencies in guard-cucumber.gemspec
 gemspec
 
 gem 'rake'
 
-platform :ruby do
-  gem 'rb-readline'
-end
-
 require 'rbconfig'
 
 if RbConfig::CONFIG['target_os'] =~ /darwin/i
-  gem 'ruby_gntp',  '~> 0.3.4', :require => false
-elsif RbConfig::CONFIG['target_os'] =~ /linux/i
-  gem 'libnotify',  '~> 0.7.1', :require => false
-elsif RbConfig::CONFIG['target_os'] =~ /mswin|mingw/i
-  gem 'win32console', :require => false
-  gem 'rb-notifu', '>= 0.0.4', :require => false
+  gem 'rb-fsevent', '>= 0.4.0'
+  gem 'growl',      '~> 1.0.3'
+end
+if RbConfig::CONFIG['target_os'] =~ /linux/i
+  gem 'rb-inotify', '>= 0.8.4'
+  gem 'libnotify',  '~> 0.3.0'
 end
