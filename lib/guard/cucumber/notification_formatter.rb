@@ -65,8 +65,9 @@ module Guard
       # @param [Symbol] status the status of the step
       # @param [Integer] source_indent the source indentation
       # @param [Cucumber::Ast::Background] background the feature background
+      # @param [String] file name and line number describing where the step is used
       #
-      def step_name(keyword, step_match, status, source_indent, background)
+      def step_name(keyword, step_match, status, source_indent, background, file_colon_line)
         if [:failed, :pending, :undefined].index(status)
           @rerun = true
           step_name = step_match.format_args(lambda { |param| "*#{ param }*" })
