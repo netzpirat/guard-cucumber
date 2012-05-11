@@ -86,10 +86,10 @@ describe Guard::Cucumber do
 
     it 'cleans failed memory if passed' do
       runner.should_receive(:run).with(['features/foo'], default_options).and_return(false)
-      expect { guard.run_on_change(['features/foo']) }.to throw_symbol :task_has_failed
+      expect { guard.run_on_changes(['features/foo']) }.to throw_symbol :task_has_failed
       runner.should_receive(:run).with(['features'], default_options.merge(:message => 'Running all features')).and_return(true)
       runner.should_receive(:run).with(['features/bar'], default_options).and_return(true)
-      guard.run_on_change(['features/bar'])
+      guard.run_on_changes(['features/bar'])
     end
 
     it 'saves failed features' do
@@ -103,7 +103,7 @@ describe Guard::Cucumber do
 
       runner.should_receive(:run).with(['features/bar', 'features/foo'], default_options).and_return(true)
       runner.should_receive(:run).with(['features'], default_options.merge(:message => 'Running all features')).and_return(true)
-      guard.run_on_change(['features/bar'])
+      guard.run_on_changes(['features/bar'])
     end
 
     context 'with the :cli option' do
@@ -126,7 +126,7 @@ describe Guard::Cucumber do
         expect { guard.run_all }.to throw_symbol :task_has_failed
         runner.should_receive(:run).with(['features/bar'], run_options).and_return(true)
         runner.should_receive(:run).with(['features'], run_options.merge(:message => 'Running all features')).and_return(true)
-        guard.run_on_change(['features/bar'])
+        guard.run_on_changes(['features/bar'])
       end
     end
 
@@ -145,42 +145,42 @@ describe Guard::Cucumber do
   describe '#reload' do
     it 'clears failed_path' do
       runner.should_receive(:run).with(['features/foo'], default_options).and_return(false)
-      expect { guard.run_on_change(['features/foo']) }.to throw_symbol :task_has_failed
+      expect { guard.run_on_changes(['features/foo']) }.to throw_symbol :task_has_failed
       guard.reload
       runner.should_receive(:run).with(['features/bar'], default_options).and_return(true)
       runner.should_receive(:run).with(['features'], default_options.merge(:message => 'Running all features')).and_return(true)
-      guard.run_on_change(['features/bar'])
+      guard.run_on_changes(['features/bar'])
     end
   end
 
-  describe '#run_on_change' do
+  describe '#run_on_changes' do
     it 'runs cucumber with all features' do
       runner.should_receive(:run).with(['features'], default_options.merge(:message => 'Running all features')).and_return(true)
-      guard.run_on_change(['features'])
+      guard.run_on_changes(['features'])
     end
 
     it 'runs cucumber with single feature' do
       runner.should_receive(:run).with(['features/a.feature'], default_options).and_return(true)
-      guard.run_on_change(['features/a.feature'])
+      guard.run_on_changes(['features/a.feature'])
     end
 
     it 'passes the matched paths to the inspector for cleanup' do
       runner.stub(:run).and_return(true)
       Guard::Cucumber::Inspector.should_receive(:clean).with(['features']).and_return ['features']
-      guard.run_on_change(['features'])
+      guard.run_on_changes(['features'])
     end
 
     it 'calls #run_all if the changed specs pass after failing' do
       runner.should_receive(:run).with(['features/foo'], default_options).and_return(false, true)
       runner.should_receive(:run).with(['features'], default_options.merge(:message => 'Running all features')).and_return(true)
-      expect { guard.run_on_change(['features/foo']) }.to throw_symbol :task_has_failed
-      guard.run_on_change(['features/foo'])
+      expect { guard.run_on_changes(['features/foo']) }.to throw_symbol :task_has_failed
+      guard.run_on_changes(['features/foo'])
     end
 
     it 'does not call #run_all if the changed specs pass without failing' do
       runner.should_receive(:run).with(['features/foo'], default_options).and_return(true)
       runner.should_not_receive(:run).with(['features'], default_options.merge(:message => 'Running all features'))
-      guard.run_on_change(['features/foo'])
+      guard.run_on_changes(['features/foo'])
     end
 
     context 'with a :cli option' do
@@ -188,7 +188,7 @@ describe Guard::Cucumber do
 
       it 'directly passes the :cli option to the runner' do
         runner.should_receive(:run).with(['features'], default_options.merge(:cli => '--color', :message => 'Running all features')).and_return(true)
-        guard.run_on_change(['features'])
+        guard.run_on_changes(['features'])
       end
     end
 
@@ -198,8 +198,8 @@ describe Guard::Cucumber do
       it 'does not call #run_all if the changed specs pass after failing but the :all_after_pass option is false' do
         runner.should_receive(:run).with(['features/foo'], default_options.merge(:all_after_pass => false)).and_return(false, true)
         runner.should_not_receive(:run).with(['features'], default_options.merge(:all_after_pass => false, :message => 'Running all features')).and_return(true)
-        expect { guard.run_on_change(['features/foo']) }.to throw_symbol :task_has_failed
-        guard.run_on_change(['features/foo'])
+        expect { guard.run_on_changes(['features/foo']) }.to throw_symbol :task_has_failed
+        guard.run_on_changes(['features/foo'])
       end
     end
 
@@ -214,12 +214,12 @@ describe Guard::Cucumber do
         runner.should_receive(:run).with(['features/foo'], default_options).and_return(false)
         File.should_receive(:exist?).with('rerun.txt').and_return true
         File.should_receive(:delete).with('rerun.txt')
-        expect { guard.run_on_change(['features/foo']) }.to throw_symbol :task_has_failed
+        expect { guard.run_on_changes(['features/foo']) }.to throw_symbol :task_has_failed
         runner.should_receive(:run).with(['features/bar', 'features/foo'], default_options).and_return(true)
         runner.should_receive(:run).with(['features'], default_options.merge(:message => 'Running all features')).and_return(true)
-        guard.run_on_change(['features/bar'])
+        guard.run_on_changes(['features/bar'])
         runner.should_receive(:run).with(['features/bar'], default_options).and_return(true)
-        guard.run_on_change(['features/bar'])
+        guard.run_on_changes(['features/bar'])
       end
     end
 
@@ -231,7 +231,7 @@ describe Guard::Cucumber do
       it 'uses the change formatter if one is given' do
         runner.should_receive(:run).with(['features/bar'], default_options.merge(:change_format => 'pretty',
                                                                                  :cli           => expected_cli)).and_return(true)
-        guard.run_on_change(['features/bar'])
+        guard.run_on_changes(['features/bar'])
       end
     end
   end
