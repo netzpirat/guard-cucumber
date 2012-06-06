@@ -11,6 +11,26 @@ describe Guard::Cucumber::Runner do
       end
     end
 
+    context 'with a paths argument' do
+      it 'runs the given paths' do
+        runner.should_receive(:system).with(
+            /features\/foo\.feature features\/bar\.feature$/
+        )
+        runner.run(['features/foo.feature', 'features/bar.feature'])
+      end
+    end
+
+    context 'with a :feature_sets option' do
+      it 'requires each feature set' do
+        feature_sets = ['feature_set_a', 'feature_set_b']
+
+        runner.should_receive(:system).with(
+            /--require feature_set_a --require feature_set_b/
+        )
+        runner.run(feature_sets, {:feature_sets => feature_sets})
+      end
+    end
+
     context 'with a :rvm option' do
       it 'executes cucumber through the rvm versions' do
         runner.should_receive(:system).with(

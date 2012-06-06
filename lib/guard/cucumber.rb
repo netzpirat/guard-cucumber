@@ -18,6 +18,7 @@ module Guard
     # @param [Array<Guard::Watcher>] watchers the watchers in the Guard block
     # @param [Hash] options the options for the Guard
     # @option options [String] :cli any arbitrary Cucumber CLI arguments
+    # @option options [Array<String>] :feature_sets a list of non-standard feature directory/ies
     # @option options [Boolean] :bundler use bundler or not
     # @option options [Array<String>] :rvm a list of rvm version to use for the test
     # @option options [Boolean] :notification show notifications
@@ -33,7 +34,8 @@ module Guard
           :all_after_pass => true,
           :all_on_start   => true,
           :keep_failed    => true,
-          :cli            => '--no-profile --color --format progress --strict'
+          :cli            => '--no-profile --color --format progress --strict',
+          :feature_sets   => ['features']
       }.update(options)
 
       @last_failed  = false
@@ -53,7 +55,7 @@ module Guard
     # @raise [:task_has_failed] when stop has failed
     #
     def run_all
-      passed = Runner.run(['features'], options.merge(options[:run_all] || { }).merge(:message => 'Running all features'))
+      passed = Runner.run(options[:feature_sets], options.merge(options[:run_all] || { }).merge(:message => 'Running all features'))
 
       if passed
         @failed_paths = []
