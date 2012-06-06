@@ -10,6 +10,7 @@ module Guard
         #
         # @param [Array<String>] paths the feature files or directories
         # @param [Hash] options the options for the execution
+        # @option options [Array<String>] :feature_sets a list of non-standard feature directory/ies
         # @option options [Boolean] :bundler use bundler or not
         # @option options [Array<String>] :rvm a list of rvm version to use for the test
         # @option options [Boolean] :notification show notifications
@@ -47,7 +48,7 @@ module Guard
             cmd << "--require #{ notification_formatter_path }"
             cmd << "--format Guard::Cucumber::NotificationFormatter"
             cmd << "--out #{ null_device }"
-            cmd << "--require features"
+            cmd << (options[:feature_sets] || ['features']).map {|path| "--require #{path}"}.join(' ')
           end
 
           (cmd + paths).join(' ')

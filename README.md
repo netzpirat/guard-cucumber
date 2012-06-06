@@ -67,6 +67,9 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
 :cli => '--profile guard -c'      # Pass arbitrary Cucumber CLI arguments,
                                   # default: '--no-profile --color --format progress --strict'
 
+:feature_sets =>                  # Use non-default feature directory/ies
+  ['set_a', 'set_b']              # default: ['features']
+
 :bundler => false                 # Don't use "bundle exec" to run the Cucumber command
                                   # default: true
 
