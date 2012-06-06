@@ -11,7 +11,8 @@ describe Guard::Cucumber do
         :all_after_pass => true,
         :all_on_start   => true,
         :keep_failed    => true,
-        :cli            => '--no-profile --color --format progress --strict'
+        :cli            => '--no-profile --color --format progress --strict',
+        :feature_sets   => ['features']
     }
   end
 
@@ -35,13 +36,18 @@ describe Guard::Cucumber do
       it 'sets a default :cli option' do
         guard.options[:cli].should eql '--no-profile --color --format progress --strict'
       end
+
+      it 'sets a default :feature_sets option' do
+        guard.options[:feature_sets].should eql ['features']
+      end
     end
 
     context 'with other options than the default ones' do
       let(:guard) { Guard::Cucumber.new(nil, { :all_after_pass => false,
                                                :all_on_start   => false,
                                                :keep_failed    => false,
-                                               :cli            => '--color' }) }
+                                               :cli            => '--color',
+                                               :feature_sets   => ['feature_set_a', 'feature_set_b'] }) }
 
       it 'sets the provided :all_after_pass option' do
         guard.options[:all_after_pass].should be_false
@@ -57,6 +63,10 @@ describe Guard::Cucumber do
 
       it 'sets the provided :cli option' do
         guard.options[:cli].should eql '--color'
+      end
+
+      it 'sets the provided :feature_sets option' do
+        guard.options[:feature_sets].should eql ['feature_set_a', 'feature_set_b']
       end
     end
   end
@@ -104,6 +114,17 @@ describe Guard::Cucumber do
       runner.should_receive(:run).with(['features/bar', 'features/foo'], default_options).and_return(true)
       runner.should_receive(:run).with(['features'], default_options.merge(:message => 'Running all features')).and_return(true)
       guard.run_on_changes(['features/bar'])
+    end
+
+    context 'with the :feature_sets option' do
+      non_standard_feature_set = ['a_non_standard_feature_set']
+      let(:guard) { Guard::Cucumber.new([], { :feature_sets => non_standard_feature_set }) }
+
+      it 'passes the feature sets as paths to runner' do
+        runner.should_receive(:run).with(non_standard_feature_set, anything).and_return(true)
+
+        guard.run_all
+      end
     end
 
     context 'with the :cli option' do
