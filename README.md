@@ -199,16 +199,16 @@ Pull requests are very welcome! Please try to follow these simple rules if appli
 For questions please join us in our [Google group](http://groups.google.com/group/guard-dev) or on
 `#guard` (irc.freenode.net).
 
+## Author
+
+Developed by Michael Kessler, sponsored by [mksoft.ch](https://mksoft.ch).
+
+If you like Guard::Cucumber, you can watch the repository at [GitHub](https://github.com/netzpirat/guard-cucumber)
+and follow [@netzpirat](https://twitter.com/#!/netzpirat) on Twitter for project updates.
+
 ## Contributors
 
-* [Aleksei Gusev](https://github.com/hron)
-* [Hedgehog](https://github.com/hedgehog)
-* [Larry Marburger](https://github.com/lmarburger)
-* [Loren Norman](https://github.com/lorennorman)
-* [Neil Matatall](https://github.com/oreoshake)
-* [Nicholas A Clark](https://github.com/NickClark)
-* [Oriol Gual](https://github.com/oriolgual)
-* [Robert Sanders](https://github.com/robertzx)
+See the GitHub list of [contributors](https://github.com/netzpirat/guard-jasmine/contributors).
 
 Since guard-cucumber is very close to guard-rspec, some contributions by the following authors have been
 incorporated into guard-cucumber:
