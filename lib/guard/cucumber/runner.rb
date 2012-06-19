@@ -13,6 +13,7 @@ module Guard
         # @option options [Boolean] :bundler use bundler or not
         # @option options [Array<String>] :rvm a list of rvm version to use for the test
         # @option options [Boolean] :notification show notifications
+        # @option options [String] :command_prefix allows adding an additional prefix to the cucumber command. Ideal for running xvfb-run for terminal only cucumber tests.
         # @return [Boolean] the status of the execution
         #
         def run(paths, options = { })
@@ -33,7 +34,7 @@ module Guard
         # @option options [Boolean] :bundler use bundler or not
         # @option options [Array<String>] :rvm a list of rvm version to use for the test
         # @option options [Boolean] :notification show notifications
-        # @option options [Boolean] :command_prefix allows adding an additional prefix to the cucumber command. Ideal for running xvfb-run for terminal only cucumber tests.
+        # @option options [String] :command_prefix allows adding an additional prefix to the cucumber command. Ideal for running xvfb-run for terminal only cucumber tests.
         # @return [String] the Cucumber command
         #
         def cucumber_command(paths, options)
