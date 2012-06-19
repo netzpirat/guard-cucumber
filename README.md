@@ -94,6 +94,11 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
 :change_format => 'pretty'        # Use a different cucumber format when running individual features
                                   # This replaces the Cucumber --format option within the :cli option
                                   # default: nil
+
+:command_prefix => 'xvfb-run'     # Add a prefix to the cucumber command such as 'xvfb-run' or any 
+                                  # other shell script. 
+                                  # The example generates: 'xvfb-run bundle exec cucumber ...'
+                                  # default: nil
 ```
 
 ## Cucumber configuration

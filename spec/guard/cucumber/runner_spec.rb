@@ -20,6 +20,15 @@ describe Guard::Cucumber::Runner do
       end
     end
 
+    context 'with a :command_prefix option' do
+      it 'executes cucumber with the command_prefix option' do
+        runner.should_receive(:system).with(
+            "xvfb-run bundle exec cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
+        )
+        runner.run(['features'], { :command_prefix => "xvfb-run" })
+      end
+    end
+
     context 'with a :bundler option' do
       it 'runs without bundler when false' do
         runner.should_receive(:system).with(
