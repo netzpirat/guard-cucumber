@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 1.2.1 - Oct 31, 2012
 
 - [#36](): `:feature_sets` defined in Guardfile is not taken in account.
 
