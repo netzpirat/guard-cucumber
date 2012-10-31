@@ -187,7 +187,7 @@ describe Guard::Cucumber do
 
     it 'passes the matched paths to the inspector for cleanup' do
       runner.stub(:run).and_return(true)
-      Guard::Cucumber::Inspector.should_receive(:clean).with(['features']).and_return ['features']
+      Guard::Cucumber::Inspector.should_receive(:clean).with(['features'], ['features']).and_return ['features']
       guard.run_on_changes(['features'])
     end
 

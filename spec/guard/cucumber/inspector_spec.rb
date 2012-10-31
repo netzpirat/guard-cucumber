@@ -4,50 +4,77 @@ describe Guard::Cucumber::Inspector do
 
   let(:inspector) { Guard::Cucumber::Inspector }
 
-  before do
-    Dir.stub(:glob).and_return ['features/a.feature', 'features/subfolder/b.feature']
-  end
-
   describe '.clean' do
-    it 'removes non-feature files' do
-      inspector.clean(['features/a.feature', 'b.rb']).should == ['features/a.feature']
+    context 'with the standard feature set' do
+      before do
+        Dir.stub(:glob).and_return %w(features/a.feature features/subfolder/b.feature)
+      end
+
+      it 'removes non-feature files' do
+        inspector.clean(%w(features/a.feature b.rb), %w(features)).should == %w(features/a.feature)
+      end
+
+      it 'removes non-existing feature files' do
+        inspector.clean(%w(features/a.feature features/x.feature), %w(features)).should == %w(features/a.feature)
+      end
+
+      it 'keeps a feature folder' do
+        inspector.clean(%w(features/a.feature features/subfolder), %w(features)).should == %w(features/a.feature features/subfolder)
+      end
+
+      it 'removes duplicate paths' do
+        inspector.clean(%w(features features), %w(features)).should == %w(features)
+      end
+
+      it 'removes individual feature tests if the path is already in paths to run' do
+        inspector.clean(%w(features/a.feature features/a.feature:10), %w(features)).should == %w(features/a.feature)
+      end
+
+      it 'removes feature folders included in other feature folders' do
+        inspector.clean(%w(features/subfolder features), %w(features)).should == %w(features)
+      end
+
+      it 'removes feature files includes in feature folder' do
+        inspector.clean(%w(features/subfolder/b.feature features), %w(features)).should == %w(features)
+      end
     end
 
-    it 'removes non-existing feature files' do
-      inspector.clean(['features/a.feature', 'features/x.feature']).should == ['features/a.feature']
-    end
+    context 'with an additional feature set' do
+      before do
+        Dir.stub(:glob).and_return %w(feature_set_1/a.feature feature_set_1/subfolder/b.feature feature_set_2/c.feature feature_set_2/subfolder/d.feature)
+      end
 
-    it 'keeps a feature folder' do
-      inspector.clean(['features/a.feature', 'features/subfolder']).should == ['features/a.feature',
-                                                                               'features/subfolder']
-    end
+      it 'removes non-feature files' do
+        inspector.clean(%w(feature_set_1/a.feature feature_set_2/c.feature b.rb), %w(feature_set_1, feature_set_2)).should == %w(feature_set_1/a.feature feature_set_2/c.feature)
+      end
 
-    it 'removes duplicate paths' do
-      inspector.clean(['features', 'features']).should == ['features']
-    end
-    
-    it 'removes individual feature tests if the path is already in paths to run' do
-      inspector.clean(['features/a.feature', 'features/a.feature:10']).should == ['features/a.feature']
-    end
+      it 'removes non-existing feature files' do
+        inspector.clean(%w(feature_set_1/a.feature feature_set_1/x.feature feature_set_2/c.feature feature_set_2/y.feature), %w(feature_set_1 feature_set_2)).should == %w(feature_set_1/a.feature feature_set_2/c.feature)
+      end
 
-    it 'removes feature folders included in other feature folders' do
-      inspector.clean(['features/subfolder', 'features']).should == ['features']
-    end
+      it 'keeps the feature folders' do
+        inspector.clean(%w(feature_set_1/a.feature feature_set_1/subfolder feature_set_2/c.feature feature_set_2/subfolder), %w(feature_set_1 feature_set_2)).should == %w(feature_set_1/a.feature feature_set_1/subfolder feature_set_2/c.feature feature_set_2/subfolder)
+      end
 
-    it 'removes feature files includes in feature folder' do
-      inspector.clean(['features/subfolder/b.feature', 'features']).should == ['features']
-    end
-  end
-  
-  describe ".included_in_other_path?" do
-    it "detects dups when a scenario is specified, but the feature is already included" do
-      paths = Dir.glob
-    
-      # dup, add a specific test
-      dup_path = paths.last + ":22"
-      paths << dup_path  
-    
-      inspector.send(:included_in_other_path?, dup_path, paths).should be_true
+      it 'removes duplicate paths' do
+        inspector.clean(%w(feature_set_1 feature_set_1 feature_set_2 feature_set_2), %w(feature_set_1 feature_set_2)).should == %w(feature_set_1 feature_set_2)
+      end
+
+      it 'removes individual feature tests if the path is already in paths to run' do
+        inspector.clean(%w(feature_set_1/a.feature feature_set_1/a.feature:10 feature_set_2/c.feature feature_set_2/c.feature:25), %w(features feature_set_2)).should == %w(feature_set_1/a.feature feature_set_2/c.feature)
+      end
+
+      it 'removes feature folders included in other feature folders' do
+        inspector.clean(%w(feature_set_1/subfolder feature_set_1 feature_set_2/subfolder feature_set_2), %w(feature_set_1 feature_set_2)).should == %w(feature_set_1 feature_set_2)
+        inspector.clean(%w(feature_set_1 feature_set_2/subfolder), %w(feature_set_1 feature_set_2)).should == %w(feature_set_1 feature_set_2/subfolder)
+        inspector.clean(%w(feature_set_2 feature_set_1/subfolder), %w(feature_set_1 feature_set_2)).should == %w(feature_set_2 feature_set_1/subfolder)
+      end
+
+      it 'removes feature files includes in feature folder' do
+        inspector.clean(%w(feature_set_1/subfolder/b.feature feature_set_1 feature_set_2/subfolder/c.feature feature_set_2), %w(feature_set_1 feature_set_2)).should == %w(feature_set_1 feature_set_2)
+        inspector.clean(%w(feature_set_1/subfolder/b.feature feature_set_2), %w(feature_set_1 feature_set_2)).should == %w(feature_set_1/subfolder/b.feature feature_set_2)
+        inspector.clean(%w(feature_set_2/subfolder/d.feature feature_set_1), %w(feature_set_1 feature_set_2)).should == %w(feature_set_2/subfolder/d.feature feature_set_1)
+      end
     end
   end
 end

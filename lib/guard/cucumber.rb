@@ -30,6 +30,7 @@ module Guard
     #
     def initialize(watchers = [], options = { })
       super
+
       @options = {
           :all_after_pass => true,
           :all_on_start   => true,
@@ -83,7 +84,7 @@ module Guard
     #
     def run_on_changes(paths)
       paths += @failed_paths if @options[:keep_failed]
-      paths   = Inspector.clean(paths)
+      paths   = Inspector.clean(paths, options[:feature_sets])
       options = @options[:change_format] ? change_format(@options[:change_format]) : @options
       passed  = Runner.run(paths, paths.include?('features') ? options.merge({ :message => 'Running all features' }) : options)
 
