@@ -13,6 +13,8 @@ module Guard
     autoload :Runner, 'guard/cucumber/runner'
     autoload :Inspector, 'guard/cucumber/inspector'
 
+    attr_accessor :last_failed, :failed_path
+
     # Initialize Guard::Cucumber.
     #
     # @param [Array<Guard::Watcher>] watchers the watchers in the Guard block
