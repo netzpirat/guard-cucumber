@@ -98,8 +98,8 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
                                   # This replaces the Cucumber --format option within the :cli option
                                   # default: nil
 
-:command_prefix => 'xvfb-run'     # Add a prefix to the cucumber command such as 'xvfb-run' or any 
-                                  # other shell script. 
+:command_prefix => 'xvfb-run'     # Add a prefix to the cucumber command such as 'xvfb-run' or any
+                                  # other shell script.
                                   # The example generates: 'xvfb-run bundle exec cucumber ...'
                                   # default: nil
 ```
@@ -164,13 +164,6 @@ end
 ```
 
 There is a section with alternative configurations on the [Wiki](https://github.com/netzpirat/guard-cucumber/wiki/Spork-configurations).
-
-## Shameless self promotion
-
-Developed by Michael Kessler, sponsored by [mksoft.ch](https://mksoft.ch).
-
-If you like Guard::Cucumber, you can watch the repository at [GitHub](https://github.com/netzpirat/guard-cucumber) and
-follow [@netzpirat](https://twitter.com/#!/netzpirat) on Twitter for project updates.
 
 Issues
 ------
