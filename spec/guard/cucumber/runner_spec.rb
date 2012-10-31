@@ -4,6 +4,10 @@ describe Guard::Cucumber::Runner do
   let(:runner) { Guard::Cucumber::Runner }
   let(:null_device) { RUBY_PLATFORM.index('mswin') ? 'NUL' : '/dev/null' }
 
+  before do
+    Guard::UI.stub(:info)
+  end
+
   describe '#run' do
     context "when passed an empty paths list" do
       it "returns false" do
