@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Michael Kessler']
   s.email       = ['michi@netzpiraten.ch']
   s.homepage    = 'http://github.com/netzpirat/guard-cucumber'
-  s.summary     = 'Guard gem for Cucumber'
+  s.summary     = 'Guard plugin for Cucumber'
   s.description = 'Guard::Cucumber automatically run your features (much like autotest)'
 
   s.required_rubygems_version = '>= 1.3.6'
@@ -17,12 +17,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'guard',       '>= 1.1.0'
   s.add_dependency 'cucumber',    '>= 1.2.0'
-
-  s.add_development_dependency 'bundler'
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'guard-rspec'
-  s.add_development_dependency 'yard'
-  s.add_development_dependency 'redcarpet'
 
   s.files        = Dir.glob('{lib}/**/*') + %w[LICENSE README.md]
   s.require_path = 'lib'

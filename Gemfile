@@ -4,9 +4,15 @@ gemspec
 
 gem 'rake'
 
-platform :ruby do
-  gem 'rb-readline'
-end
+gem 'rspec'
+gem 'guard-rspec'
+gem 'yard'
+gem 'redcarpet'
+
+gem 'rb-inotify', :require => false
+gem 'rb-fsevent', :require => false
+gem 'rb-fchange', :require => false
+
 
 require 'rbconfig'
 
