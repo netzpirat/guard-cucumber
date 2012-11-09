@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'fakefs/spec_helpers'
 
 describe Guard::Cucumber::Runner do
   let(:runner) { Guard::Cucumber::Runner }
@@ -16,6 +17,35 @@ describe Guard::Cucumber::Runner do
     end
 
     context 'with a paths argument' do
+
+      context 'checking for the @focus tag' do
+
+        before do
+          include FakeFS::SpecHelpers
+          @path = 'foo.feature'
+          File.open(@path, 'w') do |f|
+            f.write "@focus\nScenario: Foo\n\tGiven bar"
+          end
+        end
+
+        it 'should return the line numbers where @focus appears' do
+          line_numbers = []
+          File.open(@path, 'r') do |f|
+            while (line = f.gets)
+              if line.include?('@focus')
+                line_numbers << f.lineno
+              end
+            end
+          end
+          line_numbers.should eq([1])
+        end
+
+        it 'should append the line number to the path' do
+
+        end
+
+      end
+
       it 'runs the given paths' do
         runner.should_receive(:system).with(
             /features\/foo\.feature features\/bar\.feature$/
