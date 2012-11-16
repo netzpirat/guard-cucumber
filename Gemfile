@@ -10,7 +10,7 @@ gem 'yard'
 gem 'redcarpet'
 
 gem 'rb-inotify', :require => false
-gem 'rb-fsevent', :require => false
+gem 'rb-fsevent', '~> 0.9.1'
 gem 'rb-fchange', :require => false
 
 group :test do
