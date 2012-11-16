@@ -21,6 +21,8 @@ module Guard
           return false if paths.empty?
 
           message = options[:message] || (paths == ['features'] ? "Running all Cucumber features: #{ cucumber_command(paths, options) }" : "Running Cucumber features: #{ cucumber_command(paths, options) }")
+          paths   = options[:focus_on] ? Focuser.focus(paths, options[:focus_on]) : paths
+
           UI.info message, :reset => true
 
           system(cucumber_command(paths, options))
