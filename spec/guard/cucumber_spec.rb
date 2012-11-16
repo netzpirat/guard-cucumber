@@ -47,7 +47,8 @@ describe Guard::Cucumber do
                                                :all_on_start   => false,
                                                :keep_failed    => false,
                                                :cli            => '--color',
-                                               :feature_sets   => ['feature_set_a', 'feature_set_b'] }) }
+                                               :feature_sets   => ['feature_set_a', 'feature_set_b'],
+                                               :focus_on       => '@focus' }) }
 
       it 'sets the provided :all_after_pass option' do
         guard.options[:all_after_pass].should be_false
@@ -68,6 +69,11 @@ describe Guard::Cucumber do
       it 'sets the provided :feature_sets option' do
         guard.options[:feature_sets].should eql ['feature_set_a', 'feature_set_b']
       end
+
+      it 'sets the provided :focus_on option' do
+        guard.options[:focus_on].should eql '@focus'
+      end
+
     end
   end
 
