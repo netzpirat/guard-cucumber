@@ -216,7 +216,7 @@ and follow [@netzpirat](https://twitter.com/#!/netzpirat) on Twitter for project
 
 ## Contributors
 
-See the GitHub list of [contributors](https://github.com/netzpirat/guard-jasmine/contributors).
+See the GitHub list of [contributors](https://github.com/netzpirat/guard-cucumber/contributors).
 
 Since guard-cucumber is very close to guard-rspec, some contributions by the following authors have been
 incorporated into guard-cucumber:
