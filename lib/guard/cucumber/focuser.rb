@@ -4,8 +4,8 @@ module Guard
     # The Cucumber focuser updates cucumber feature paths to
     # focus on sections tagged with a provided focus_tag.
     #
-    # For example, if the the `foo.feature` file has the provided focus tag
-    # '@bar' on line 8, then the path will be updated using the cucumber
+    # For example, if the `foo.feature` file has the provided focus tag
+    # `@bar` on line 8, then the path will be updated using the cucumber
     # syntax for focusing on a section:
     #
     # foo.feature:8
@@ -22,7 +22,7 @@ module Guard
 
         # Focus the supplied paths using the provided focus tag.
         #
-        # @param [Array<String>] paths the feature files
+        # @param [Array<String>] paths the locations of the feature files
         # @param [String] focus_tag the focus tag to look for in each path
         # @return [Array<String>] the updated paths
         #
@@ -69,7 +69,7 @@ module Guard
         # Appends the line numbers to the path
         #
         # @param [Array<Integer>] line_numbers the line numbers to append to the path
-        # @param [String] path the path that will receive the append line numbers
+        # @param [String] path the path that will receive the appended line numbers
         # @return [String] the string containing the path appended with the line number
         #
         def append_line_numbers_to_path(line_numbers, path)
