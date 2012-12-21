@@ -165,6 +165,16 @@ end
 
 There is a section with alternative configurations on the [Wiki](https://github.com/netzpirat/guard-cucumber/wiki/Spork-configurations).
 
+## Cucumber with Zeus
+
+To use Guard::Cucumber with [Zeus](https://github.com/burke/zeus), just set the command prefix:
+```
+guard 'cucumber', :cli => '--format progress --no-profile', :command_prefix => 'zeus' do
+  ...
+end
+```
+You may also want to set `:bundler => false` to avoid using Bundler, as recommended in the Zeus documenation.
+
 Issues
 ------
 
