@@ -3,10 +3,12 @@ source :rubygems
 gemspec
 
 gem 'rake'
-
 gem 'rspec'
 
-unless ENV['TRAVIS']
+# The development group will no be
+# installed on Travis CI.
+#
+group :development do
   gem 'guard-rspec'
   gem 'yard'
   gem 'redcarpet'
