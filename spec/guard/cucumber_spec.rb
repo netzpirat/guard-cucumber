@@ -149,7 +149,7 @@ describe Guard::Cucumber do
 
       it 'does not save failed features if keep_failed is disabled' do
         runner.should_receive(:run).with(['features'], run_options.merge(:message => 'Running all features')).and_return(false)
-        File.should_not_receive(:exist?).with('rerun.txt').and_return true
+        File.should_not_receive(:exist?).with('rerun.txt')
         expect { guard.run_all }.to throw_symbol :task_has_failed
         runner.should_receive(:run).with(['features/bar'], run_options).and_return(true)
         runner.should_receive(:run).with(['features'], run_options.merge(:message => 'Running all features')).and_return(true)
@@ -224,7 +224,7 @@ describe Guard::Cucumber do
 
       it 'does not call #run_all if the changed specs pass after failing but the :all_after_pass option is false' do
         runner.should_receive(:run).with(['features/foo'], default_options.merge(:all_after_pass => false)).and_return(false, true)
-        runner.should_not_receive(:run).with(['features'], default_options.merge(:all_after_pass => false, :message => 'Running all features')).and_return(true)
+        runner.should_not_receive(:run).with(['features'], default_options.merge(:all_after_pass => false, :message => 'Running all features'))
         expect { guard.run_on_changes(['features/foo']) }.to throw_symbol :task_has_failed
         guard.run_on_changes(['features/foo'])
       end
