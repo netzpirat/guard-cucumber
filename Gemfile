@@ -5,7 +5,6 @@ gemspec
 gem 'rake'
 
 gem 'rspec'
-gem 'fakefs', :require => 'fakefs/safe'
 
 unless ENV['TRAVIS']
   gem 'guard-rspec'

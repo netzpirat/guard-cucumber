@@ -1,8 +1,6 @@
 require 'spec_helper'
-require 'fakefs/spec_helpers'
 
 describe Guard::Cucumber::Focuser do
-  include FakeFS::SpecHelpers
 
   let(:focuser)     { Guard::Cucumber::Focuser }
   let(:focus_tag)   { '@focus' }
@@ -20,17 +18,35 @@ describe Guard::Cucumber::Focuser do
     end
 
     context 'when passed a paths argument' do
+      let(:file) do
+        StringIO.new <<-EOS
+          @focus
+          Scenario: Foo
+          Given bar
+          Scenario: Bar
+          Given lorem
+          @focus
+          Scenario: Ipsum
+          Given dolor
+        EOS
+      end
+
+      let(:file_two) do
+        StringIO.new <<-EOS
+          @focus
+          Scenario: Lorem
+          Given ipsum
+          @focus
+          Scenario: Bar
+          Given lorem
+          Scenario: Dolor
+          Given sit
+        EOS
+      end
+
       before do
-        File.open(path, 'w') do |f|
-          f.write "@focus\nScenario: Foo\n\tGiven bar\n"
-          f.write "Scenario: Bar\n\tGiven lorem\n"
-          f.write "@focus\nScenario: Ipsum\n\tGiven dolor"
-        end
-        File.open(path_two, 'w') do |f|
-          f.write "@focus\nScenario: Lorem\n\tGiven ipsum\n"
-          f.write "@focus\nScenario: Bar\n\tGiven lorem\n"
-          f.write "Scenario: Dolor\n\tGiven sit\n"
-        end
+        File.should_receive(:open).with(path, 'r').and_yield(file)
+        File.should_receive(:open).with(path_two, 'r').and_yield(file_two)
       end
 
       it 'returns an array of paths updated to focus on line numbers' do
@@ -46,12 +62,21 @@ describe Guard::Cucumber::Focuser do
 
   describe '#scan_path_for_focus_tag' do
     context 'file with focus tags in it' do
+      let(:file) do
+        StringIO.new <<-EOS
+          @focus
+          Scenario: Foo
+          Given bar
+          Scenario: Bar
+          Given lorem
+          @focus
+          Scenario: Ipsum
+          Given dolor
+        EOS
+      end
+
       before do
-        File.open(path, 'w') do |f|
-          f.write "@focus\nScenario: Foo\n\tGiven bar\n"
-          f.write "Scenario: Bar\n\tGiven lorem\n"
-          f.write "@focus\nScenario: Ipsum\n\tGiven dolor"
-        end
+        File.should_receive(:open).with(path, 'r').and_yield(file)
       end
 
       it 'returns an array of line numbers' do
@@ -60,12 +85,19 @@ describe Guard::Cucumber::Focuser do
     end
 
     context 'file without focus tags in it' do
+      let(:file) do
+        StringIO.new <<-EOS
+          Scenario: Foo
+          Given bar
+          Scenario: Bar
+          Given lorem
+          Scenario: Ipsum
+          Given dolor
+        EOS
+      end
+
       before do
-        File.open(path, 'w') do |f|
-          f.write "Scenario: Foo\n\tGiven bar"
-          f.write "\nScenario: Bar\n\tGiven lorem"
-          f.write "\nScenario: Ipsum\n\tGiven dolor"
-        end
+        File.should_receive(:open).with(path, 'r').and_return(file)
       end
 
       it 'returns an empty array' do
