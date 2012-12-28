@@ -5,6 +5,7 @@ gemspec
 gem 'rake'
 
 gem 'rspec'
+gem 'fakefs', :require => 'fakefs/safe'
 
 unless ENV['TRAVIS']
   gem 'guard-rspec'
@@ -14,10 +15,6 @@ unless ENV['TRAVIS']
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false
   gem 'rb-fchange', :require => false
-
-  group :test do
-    gem "fakefs", :require => "fakefs/safe"
-  end
 
   require 'rbconfig'
 
