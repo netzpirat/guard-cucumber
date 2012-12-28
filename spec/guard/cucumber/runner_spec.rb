@@ -6,11 +6,12 @@ describe Guard::Cucumber::Runner do
 
   before do
     Guard::UI.stub(:info)
+    runner.stub(:system)
   end
 
   describe '#run' do
-    context "when passed an empty paths list" do
-      it "returns false" do
+    context 'when passed an empty paths list' do
+      it 'returns false' do
         runner.run([]).should be_false
       end
     end
@@ -78,43 +79,42 @@ describe Guard::Cucumber::Runner do
       end
     end
 
-
-    describe ":binstubs" do
-      it "runs without Bundler with binstubs option to true and bundler option to false" do
+    describe ':binstubs' do
+      it 'runs without Bundler with binstubs option to true and bundler option to false' do
         subject.should_receive(:system).with(
           "bundle exec bin/cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
         ).and_return(true)
-        subject.run(["features"], :bundler => false, :binstubs => true)
+        subject.run(['features'], :bundler => false, :binstubs => true)
       end
-      it "runs with Bundler and binstubs with bundler option to true and binstubs option to true" do
+      it 'runs with Bundler and binstubs with bundler option to true and binstubs option to true' do
         subject.should_receive(:system).with(
           "bundle exec bin/cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
         ).and_return(true)
-        subject.run(["features"], :bundler => true, :binstubs => true)
+        subject.run(['features'], :bundler => true, :binstubs => true)
       end
-      it "runs with Bundler and binstubs with bundler option unset and binstubs option to true" do
+      it 'runs with Bundler and binstubs with bundler option unset and binstubs option to true' do
         subject.should_receive(:system).with(
           "bundle exec bin/cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
         ).and_return(true)
-        subject.run(["features"], :binstubs => true)
+        subject.run(['features'], :binstubs => true)
       end
-      it "runs with Bundler and binstubs with bundler option unset, binstubs option to true and all_after_pass option to true" do
+      it 'runs with Bundler and binstubs with bundler option unset, binstubs option to true and all_after_pass option to true' do
         subject.should_receive(:system).with(
           "bundle exec bin/cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
         ).and_return(true)
-        subject.run(["features"], :binstubs => true, :all_after_pass => true)
+        subject.run(['features'], :binstubs => true, :all_after_pass => true)
       end
-      it "runs with Bundler and binstubs with bundler option unset, binstubs option to true and all_on_start option to true" do
+      it 'runs with Bundler and binstubs with bundler option unset, binstubs option to true and all_on_start option to true' do
         subject.should_receive(:system).with(
           "bundle exec bin/cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
         ).and_return(true)
-        subject.run(["features"], :binstubs => true, :all_on_start => true)
+        subject.run(['features'], :binstubs => true, :all_on_start => true)
       end
-      it "runs with Bundler and binstubs with bundler option unset, binstubs option to true, all_on_start option to true and all_after_pass option to true" do
+      it 'runs with Bundler and binstubs with bundler option unset, binstubs option to true, all_on_start option to true and all_after_pass option to true' do
         subject.should_receive(:system).with(
           "bundle exec bin/cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
         ).and_return(true)
-        subject.run(["features"], :binstubs => true, :all_after_pass => true, :all_on_start => true)
+        subject.run(['features'], :binstubs => true, :all_after_pass => true, :all_on_start => true)
       end
     end
 
@@ -123,14 +123,14 @@ describe Guard::Cucumber::Runner do
         runner.should_receive(:system).with(
             "bundle exec cucumber --custom command --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
         )
-        runner.run(['features'], { :cli => "--custom command" })
+        runner.run(['features'], { :cli => '--custom command' })
       end
     end
 
     context 'with a :notification option' do
       it 'does not add the guard notification listener' do
         runner.should_receive(:system).with(
-            "bundle exec cucumber features"
+            'bundle exec cucumber features'
         )
         runner.run(['features'], { :notification => false })
       end
