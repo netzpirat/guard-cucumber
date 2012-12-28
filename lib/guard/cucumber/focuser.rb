@@ -16,7 +16,6 @@ module Guard
     #
     # The path is not updated if it does not contain the focus tag.
     #
-    #
     module Focuser
       class << self
 
@@ -29,21 +28,19 @@ module Guard
         def focus(paths, focus_tag)
           return false if paths.empty?
 
-          updated_paths = []
+          paths.inject([]) do |updated_paths, path|
+            focused_line_numbers = scan_path_for_focus_tag(path, focus_tag)
 
-          paths.each do |path|
-            focussed_line_numbers = scan_path_for_focus_tag(path, focus_tag)
-
-            unless focussed_line_numbers.empty?
+            unless focused_line_numbers.empty?
               updated_paths << append_line_numbers_to_path(
-                focussed_line_numbers, path
+                focused_line_numbers, path
               )
             else
               updated_paths << path
             end
-          end
 
-          updated_paths
+            updated_paths
+          end
         end
 
         # Checks to see if the file at path contains the focus tag
@@ -73,7 +70,7 @@ module Guard
         # @return [String] the string containing the path appended with the line number
         #
         def append_line_numbers_to_path(line_numbers, path)
-          line_numbers.each { |num| path += ":" + num.to_s }
+          line_numbers.each { |num| path += ':' + num.to_s }
 
           path
         end
