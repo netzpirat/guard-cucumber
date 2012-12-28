@@ -102,6 +102,11 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
                                   # other shell script.
                                   # The example generates: 'xvfb-run bundle exec cucumber ...'
                                   # default: nil
+
+:focus_on => 'dev'                # Focus on scenarios tagged with '@dev'
+                                  # If '@dev' is on line 6 in 'foo.feature',
+                                  # this example runs: 'bundle exec cucumber foo.feature:6'
+                                  # default: nil
 ```
 
 ## Cucumber configuration

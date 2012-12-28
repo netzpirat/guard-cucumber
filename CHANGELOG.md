@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2 - Dec 28, 2012
+
+- Add Guard::Cucmber::Focuser
+
 ## 1.2.2 - Oct 31, 2012
 
 - Add accessors for `last_failed` and `failed_path`

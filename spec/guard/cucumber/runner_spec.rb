@@ -16,6 +16,7 @@ describe Guard::Cucumber::Runner do
     end
 
     context 'with a paths argument' do
+
       it 'runs the given paths' do
         runner.should_receive(:system).with(
             /features\/foo\.feature features\/bar\.feature$/
@@ -61,6 +62,22 @@ describe Guard::Cucumber::Runner do
         runner.run(['features'], { :bundler => false })
       end
     end
+
+    context 'with a :focus_on option' do
+      it 'passes the value in :focus_on to the Focuser' do
+        paths = ['features']
+        focus_on_hash = {
+          :focus_on => '@focus'
+        }
+
+        Guard::Cucumber::Focuser.should_receive(:focus).with(
+          paths, focus_on_hash[:focus_on]
+        ).and_return(paths)
+
+        runner.run(paths, focus_on_hash)
+      end
+    end
+
 
     describe ":binstubs" do
       it "runs without Bundler with binstubs option to true and bundler option to false" do

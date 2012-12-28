@@ -15,6 +15,10 @@ unless ENV['TRAVIS']
   gem 'rb-fsevent', :require => false
   gem 'rb-fchange', :require => false
 
+  group :test do
+    gem "fakefs", :require => "fakefs/safe"
+  end
+
   require 'rbconfig'
 
   if RbConfig::CONFIG['target_os'] =~ /darwin/i
