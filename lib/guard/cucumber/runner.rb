@@ -43,7 +43,7 @@ module Guard
         def cucumber_command(paths, options)
           cmd = []
           cmd << options[:command_prefix] if options[:command_prefix]
-          cmd << "rvm #{options[:rvm].join(',')} exec" if options[:rvm].is_a?(Array)
+          cmd << "rvm #{ options[:rvm].join(',') } exec" if options[:rvm].is_a?(Array)
           cmd << 'bundle exec' if (bundler? && options[:bundler] != false) || (bundler? && options[:binstubs].is_a?(TrueClass))
           cmd << cucumber_exec(options)
           cmd << options[:cli] if options[:cli]
@@ -51,9 +51,9 @@ module Guard
           if options[:notification] != false
             notification_formatter_path = File.expand_path(File.join(File.dirname(__FILE__), 'notification_formatter.rb'))
             cmd << "--require #{ notification_formatter_path }"
-            cmd << "--format Guard::Cucumber::NotificationFormatter"
+            cmd << '--format Guard::Cucumber::NotificationFormatter'
             cmd << "--out #{ null_device }"
-            cmd << (options[:feature_sets] || ['features']).map {|path| "--require #{path}"}.join(' ')
+            cmd << (options[:feature_sets] || ['features']).map {|path| "--require #{ path }"}.join(' ')
           end
 
           (cmd + paths).join(' ')
@@ -64,7 +64,7 @@ module Guard
         # @return [String] Cucumber executable
         #
         def cucumber_exec(options = {})
-            options[:binstubs] == true && ( bundler? || options[:bundler] != false ) ? "bin/cucumber" : "cucumber"
+            options[:binstubs] == true && ( bundler? || options[:bundler] != false ) ? 'bin/cucumber' : 'cucumber'
         end
 
         # Simple test if bundler should be used. it just checks for the `Gemfile`.
@@ -72,7 +72,7 @@ module Guard
         # @return [Boolean] bundler exists
         #
         def bundler?
-          @bundler ||= File.exist?("#{Dir.pwd}/Gemfile")
+          @bundler ||= File.exist?("#{ Dir.pwd }/Gemfile")
         end
 
         # Returns a null device for all OS.
