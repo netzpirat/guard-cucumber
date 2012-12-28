@@ -52,7 +52,7 @@ describe Guard::Cucumber::Focuser do
       it 'returns an array of paths updated to focus on line numbers' do
         paths = [path, path_two]
 
-        focuser.focus(paths, focus_tag).should eq([
+        focuser.focus(paths, focus_tag).should eql([
           'foo.feature:1:6',
           'bar.feature:1:4'
         ])
@@ -80,7 +80,7 @@ describe Guard::Cucumber::Focuser do
       end
 
       it 'returns an array of line numbers' do
-        focuser.scan_path_for_focus_tag(path, focus_tag).should eq([1, 6])
+        focuser.scan_path_for_focus_tag(path, focus_tag).should eql([1, 6])
       end
     end
 
@@ -101,7 +101,7 @@ describe Guard::Cucumber::Focuser do
       end
 
       it 'returns an empty array' do
-        focuser.scan_path_for_focus_tag(path, focus_tag).should eq([])
+        focuser.scan_path_for_focus_tag(path, focus_tag).should eql([])
       end
     end
   end
@@ -110,7 +110,7 @@ describe Guard::Cucumber::Focuser do
     it 'returns a path with line numbers appended' do
       line_numbers = [1,2]
       returned_path = focuser.append_line_numbers_to_path(line_numbers, path)
-      returned_path.should eq(path + ':1:2')
+      returned_path.should eql(path + ':1:2')
     end
   end
 end
