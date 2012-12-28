@@ -27,7 +27,7 @@ module Guard
 
         # Tests if the file is the features folder.
         #
-        # @param [String] file the file
+        # @param [String] path the file
         # @param [Array<String>] feature_sets the feature sets
         # @return [Boolean] when the file is the feature folder
         #
@@ -37,7 +37,7 @@ module Guard
 
         # Tests if the file is valid.
         #
-        # @param [String] file the file
+        # @param [String] path the file
         # @param [Array<String>] feature_sets the feature sets
         # @return [Boolean] when the file valid
         #
