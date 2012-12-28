@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 1.3.0 - Dec 28, 2012
 
 - [#6][]: Add `:focus_on` option. ([@martco][])
 
