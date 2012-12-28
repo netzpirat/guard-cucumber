@@ -104,7 +104,8 @@ Former `:color`, `:drb`, `:port` and `:profile` options are thus deprecated and 
                                   # default: nil
 
 :focus_on => 'dev'                # Focus on scenarios tagged with '@dev'
-                                  # If '@dev' is on line 6 in 'foo.feature', this example runs: 'bundle exec cucumber foo.feature:6'
+                                  # If '@dev' is on line 6 in 'foo.feature',
+                                  # this example runs: 'bundle exec cucumber foo.feature:6'
                                   # default: nil
 ```
 
