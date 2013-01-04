@@ -44,6 +44,7 @@ module Guard
         end
 
         # Checks to see if the file at path contains the focus tag
+        # It will return an empty array if the path is a directory.
         #
         # @param [String] path the file path to search
         # @param [String] focus_tag the focus tag to look for in each path
@@ -51,6 +52,8 @@ module Guard
         #
         def scan_path_for_focus_tag(path, focus_tag)
           line_numbers = []
+
+          return line_numbers if File.directory?(path)
 
           File.open(path, 'r') do |f|
             while (line = f.gets)
