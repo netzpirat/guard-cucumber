@@ -104,6 +104,17 @@ describe Guard::Cucumber::Focuser do
         focuser.scan_path_for_focus_tag(path, focus_tag).should eql([])
       end
     end
+
+    context 'file that is a directory' do
+      before do
+        File.should_receive(:directory?).with(dir).and_return(true)
+      end
+
+      it 'returns an empty array' do
+        focuser.scan_path_for_focus_tag(dir, focus_tag).should eql([])
+      end
+    end
+
   end
 
   describe '#append_line_numbers_to_path' do
