@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 1.3.1 - Jan 7, 2013
 
 - [#7][]: Fix `run_all` with enabled focus option. ([@martco][])
 
