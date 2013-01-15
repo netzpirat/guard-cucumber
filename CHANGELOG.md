@@ -1,5 +1,9 @@
 # Changelog
 
+## Master
+
+- Do not search focus tag in files that already have a line number on rerun.
+
 ## 1.3.1 - Jan 7, 2013
 
 - [#7][]: Fix `run_all` with enabled focus option. ([@martco][])

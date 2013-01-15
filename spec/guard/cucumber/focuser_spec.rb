@@ -6,9 +6,9 @@ describe Guard::Cucumber::Focuser do
   let(:focus_tag)   { '@focus' }
   let(:null_device) { RUBY_PLATFORM.index('mswin') ? 'NUL' : '/dev/null' }
 
-  let(:dir)       { 'features' }
-  let(:path)      { 'foo.feature' }
-  let(:path_two)  { 'bar.feature' }
+  let(:dir)      { 'features' }
+  let(:path)     { 'foo.feature' }
+  let(:path_two) { 'bar.feature' }
 
   describe '.focus' do
     context 'when passed an empty paths list' do
@@ -115,6 +115,14 @@ describe Guard::Cucumber::Focuser do
       end
     end
 
+    context 'file that has already a line number' do
+      let(:path) { 'bar.feature:12' }
+
+      it 'returns an empty array' do
+        File.should_not_receive(:open).with(path, 'r')
+        focuser.scan_path_for_focus_tag(path, focus_tag).should eql([])
+      end
+    end
   end
 
   describe '.append_line_numbers_to_path' do

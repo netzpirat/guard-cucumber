@@ -51,9 +51,9 @@ module Guard
         # @return [Array<Integer>] the line numbers that include the focus tag in path
         #
         def scan_path_for_focus_tag(path, focus_tag)
-          line_numbers = []
+          return [] if File.directory?(path) || path.include?(':')
 
-          return line_numbers if File.directory?(path)
+          line_numbers = []
 
           File.open(path, 'r') do |file|
             while (line = file.gets)
