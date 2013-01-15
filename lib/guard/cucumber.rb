@@ -130,13 +130,13 @@ module Guard
     # @return [Hash] the new options
     #
     def change_format(format)
-      cli_parts = @options[:cli].split(" ")
+      cli_parts = @options[:cli].split(' ')
       cli_parts.each_with_index do |part, index|
-        if part == "--format" && cli_parts[index + 2] != "--out"
+        if part == '--format' && cli_parts[index + 2] != '--out'
           cli_parts[index + 1] = format
         end
       end
-      @options.merge(:cli => cli_parts.join(" "))
+      @options.merge(:cli => cli_parts.join(' '))
     end
 
   end
