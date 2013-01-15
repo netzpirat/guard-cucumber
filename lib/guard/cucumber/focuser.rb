@@ -55,10 +55,10 @@ module Guard
 
           return line_numbers if File.directory?(path)
 
-          File.open(path, 'r') do |f|
-            while (line = f.gets)
+          File.open(path, 'r') do |file|
+            while (line = file.gets)
               if line.include?(focus_tag)
-                line_numbers << f.lineno
+                line_numbers << file.lineno
               end
             end
           end
