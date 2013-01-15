@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 1.3.2 - Jan 15, 2013
 
 - Do not search focus tag in files that already have a line number on rerun.
 
