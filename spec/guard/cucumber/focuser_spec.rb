@@ -24,7 +24,7 @@ describe Guard::Cucumber::Focuser do
           Scenario: Foo
           Given bar
           Scenario: Bar
-          Given lorem
+          Given focus lorem
           @focus
           Scenario: Ipsum
           Given dolor
@@ -40,7 +40,7 @@ describe Guard::Cucumber::Focuser do
           Scenario: Bar
           Given lorem
           Scenario: Dolor
-          Given sit
+          Given sit focus
         EOS
       end
 
