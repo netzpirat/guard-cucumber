@@ -10,7 +10,7 @@ describe Guard::Cucumber::Focuser do
   let(:path)      { 'foo.feature' }
   let(:path_two)  { 'bar.feature' }
 
-  describe '#focus' do
+  describe '.focus' do
     context 'when passed an empty paths list' do
       it 'returns false' do
         focuser.focus([], '@focus').should be_false
@@ -60,7 +60,7 @@ describe Guard::Cucumber::Focuser do
     end
   end
 
-  describe '#scan_path_for_focus_tag' do
+  describe '.scan_path_for_focus_tag' do
     context 'file with focus tags in it' do
       let(:file) do
         StringIO.new <<-EOS
@@ -117,7 +117,7 @@ describe Guard::Cucumber::Focuser do
 
   end
 
-  describe '#append_line_numbers_to_path' do
+  describe '.append_line_numbers_to_path' do
     it 'returns a path with line numbers appended' do
       line_numbers = [1,2]
       returned_path = focuser.append_line_numbers_to_path(line_numbers, path)
