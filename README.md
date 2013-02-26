@@ -174,11 +174,23 @@ There is a section with alternative configurations on the [Wiki](https://github.
 
 To use Guard::Cucumber with [Zeus](https://github.com/burke/zeus), just set the command prefix:
 ```
-guard 'cucumber', :cli => '--format progress --no-profile', :command_prefix => 'zeus' do
+guard 'cucumber', :command_prefix => 'zeus', :bundler => false do
   ...
 end
 ```
-You may also want to set `:bundler => false` to avoid using Bundler, as recommended in the Zeus documenation.
+
+You need to set `:bundler => false` to avoid using Bundler, as recommended in the Zeus documenation.
+
+## Cucumber with Spring
+
+To use Guard::Cucumber with [Spring](https://github.com/jonleighton/spring), just set the command prefix:
+```
+guard 'cucumber', :command_prefix => 'spring', :bundler => false do
+  ...
+end
+```
+
+You need to set `:bundler => false` to avoid using Bundler, as recommended in the Spring documenation.
 
 Issues
 ------
