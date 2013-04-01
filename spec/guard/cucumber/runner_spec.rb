@@ -82,7 +82,7 @@ describe Guard::Cucumber::Runner do
     describe ':binstubs' do
       it 'runs without Bundler with binstubs option to true and bundler option to false' do
         subject.should_receive(:system).with(
-          "bundle exec bin/cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
+          "bin/cucumber --require #{ @lib_path.join('guard/cucumber/notification_formatter.rb') } --format Guard::Cucumber::NotificationFormatter --out #{ null_device } --require features features"
         ).and_return(true)
         subject.run(['features'], :bundler => false, :binstubs => true)
       end
