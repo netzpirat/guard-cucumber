@@ -44,7 +44,7 @@ module Guard
           cmd = []
           cmd << options[:command_prefix] if options[:command_prefix]
           cmd << "rvm #{ options[:rvm].join(',') } exec" if options[:rvm].is_a?(Array)
-          cmd << 'bundle exec' if (bundler? && options[:bundler] != false) || (bundler? && options[:binstubs].is_a?(TrueClass))
+          cmd << 'bundle exec' if bundler? && options[:bundler] != false
           cmd << cucumber_exec(options)
           cmd << options[:cli] if options[:cli]
 
@@ -64,7 +64,7 @@ module Guard
         # @return [String] Cucumber executable
         #
         def cucumber_exec(options = {})
-            options[:binstubs] == true && ( bundler? || options[:bundler] != false ) ? 'bin/cucumber' : 'cucumber'
+            options[:binstubs] == true ? 'bin/cucumber' : 'cucumber'
         end
 
         # Simple test if bundler should be used. it just checks for the `Gemfile`.
