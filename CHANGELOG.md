@@ -1,5 +1,7 @@
 # Changelog
 
+## 1.4.0 - Apr 1, 2013
+
 - [#8][]: Don't require Bundler to use binstubs. ([@JeanMertz][])
 
 ## 1.3.2 - Jan 15, 2013
