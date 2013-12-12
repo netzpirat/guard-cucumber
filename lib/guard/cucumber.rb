@@ -85,7 +85,7 @@ module Guard
     # @param [Array<String>] paths the changed paths and files
     # @raise [:task_has_failed] when stop has failed
     #
-    def run_on_changes(paths)
+    def run_on_modifications(paths)
       paths += @failed_paths if @options[:keep_failed]
       paths   = Inspector.clean(paths, options[:feature_sets])
       options = @options[:change_format] ? change_format(@options[:change_format]) : @options
