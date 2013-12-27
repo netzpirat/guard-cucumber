@@ -1,5 +1,9 @@
 # Changelog
 
+## Master
+
+- [#45][]: Don't require Bundler to use binstubs. ([@mgarriott][])
+
 ## 1.4.0 - Apr 1, 2013
 
 - [#8][]: Don't require Bundler to use binstubs. ([@JeanMertz][])
@@ -145,15 +149,17 @@
 [#31]: https://github.com/netzpirat/guard-cucumber/issues/31
 [#34]: https://github.com/netzpirat/guard-cucumber/issues/34
 [#36]: https://github.com/netzpirat/guard-cucumber/issues/36
+[#45]: https://github.com/netzpirat/guard-cucumber/issues/45
+[@JeanMertz]: https://github.com/JeanMertz
 [@NickClark]: https://github.com/NickClark
 [@andreassimon]: https://github.com/andreassimon
 [@dnagir]: https://github.com/dnagir
 [@hedgehog]: https://github.com/hedgehog
 [@hron]: https://github.com/hron
-[@JeanMertz]: https://github.com/JeanMertz
 [@lmarburger]: https://github.com/lmarburger
 [@lorennorman]: https://github.com/lorennorman
 [@martco]: https://github.com/martco
+[@mgarriott]: https://github.com/mgarriott
 [@mikefarmer]: https://github.com/mikefarmer
 [@oreoshake]: https://github.com/oreoshake
 [@oriolgual]: https://github.com/oriolgual
