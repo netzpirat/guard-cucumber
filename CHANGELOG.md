@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 1.4.1 - Dec 27, 2013
 
 - [#45][]: Don't require Bundler to use binstubs. ([@mgarriott][])
 
