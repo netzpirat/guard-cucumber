@@ -111,7 +111,7 @@ describe Guard::Cucumber do
     it 'saves failed features' do
       runner.should_receive(:run).with(['features'], default_options.merge(:message => 'Running all features')).and_return(false)
       File.should_receive(:exist?).with('rerun.txt').and_return true
-      file = mock('file')
+      file = double('file')
       file.should_receive(:read).and_return 'features/foo'
       File.stub(:open).and_yield file
       File.should_receive(:delete).with('rerun.txt')
@@ -232,7 +232,7 @@ describe Guard::Cucumber do
 
     context 'with a rerun.txt file' do
       before do
-        file = mock('file')
+        file = double('file')
         file.stub(:read).and_return 'features/foo'
         File.stub(:open).and_yield file
       end
