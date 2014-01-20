@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Guard::CucumberVersion::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Michael Kessler']
-  s.email       = ['michi@netzpiraten.ch']
+  s.email       = ['michi@flinkfinger.com']
   s.homepage    = 'http://github.com/netzpirat/guard-cucumber'
   s.summary     = 'Guard plugin for Cucumber'
   s.description = 'Guard::Cucumber automatically run your features (much like autotest)'
